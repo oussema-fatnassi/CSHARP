@@ -4,22 +4,56 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float movementSpeed;
-    float horizontalMovement;
-    float verticalMovement;
-    Rigidbody2D rb;
+    [SerializeField] 
+    private float speed = 1;
+    private BoxCollider2D boxCollider;
+    private Animator animator;
 
-    // Start is called before the first frame update
-    void Start()
+    private float horizontal;
+    private float vertical;
+
+    private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        horizontalMovement = Input.GetAxis("Horizontal");
-        verticalMovement = Input.GetAxis("Vertical");
-        rb.velocity = new Vector2(horizontalMovement * movementSpeed, verticalMovement * movementSpeed);
+        Move();
+        Animate();
+    }
+
+    private void Move()
+    {
+        horizontal = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxis("Vertical");
+
+        Vector3 movement = new(horizontal, vertical, 0);
+
+        // Flip player sprite based on movement direction
+        if (movement.x > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (movement.x < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+
+        // Apply movement to the player's position
+        transform.position += speed * Time.deltaTime * movement;
+    }
+
+    private void Animate()
+    {
+        if (horizontal != 0 || vertical != 0)
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
     }
 }
