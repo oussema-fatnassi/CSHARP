@@ -21,19 +21,17 @@ public class FollowerController : MonoBehaviour
 
     private void Update()
     {
-        // Calculer la distance entre "Dwarf" et "Dragon"
         float distance = Vector3.Distance(transform.position, leader.position);
 
-        // Si la distance dépasse la valeur définie, "Dwarf" se déplace vers "Dragon"
         if (distance > followDistance)
         {
-            // Calcul de la direction à suivre
+            // Calculer la direction à suivre
             Vector3 direction = (leader.position - transform.position).normalized;
 
-            // Déplacement de "Dwarf" vers "Dragon"
+            // Appliquer le mouvement normalisé pour garder une vitesse constante
             transform.position += direction * followSpeed * Time.deltaTime;
 
-            // Flip sprite en fonction de la direction horizontale
+            // Gestion du flip horizontal seulement
             if (direction.x > 0)
             {
                 transform.localScale = new Vector3(1, 1, 1);
@@ -48,10 +46,10 @@ public class FollowerController : MonoBehaviour
         }
         else
         {
-            // Si "Dwarf" ne bouge pas, désactiver l'animation de marche
             animator.SetBool("isWalking", false);
         }
     }
+
 
     private void AnimateMovement(Vector3 direction)
     {
