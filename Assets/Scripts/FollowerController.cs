@@ -1,37 +1,40 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FollowerController : MonoBehaviour
 {
-    [SerializeField] Transform leader; // Référence au personnage "Dragon"
-    public float followDistance = 2f; // Distance à maintenir entre "Dwarf" et "Dragon"
-    public float followSpeed = 5f; // Vitesse à laquelle "Dwarf" suit "Dragon"
-    
+    [SerializeField] private Transform leader; // Le leader initial (peut être configuré dans l'inspecteur)
+    public float followDistance = 2f;
+    public float followSpeed = 5f;
+
     private Animator animator;
     private Vector3 lastPosition;
 
     private void Start()
     {
-        // Récupérer l'Animator
         animator = GetComponent<Animator>();
-        // Initialiser la dernière position à la position actuelle
-        lastPosition = transform.position;
+        lastPosition = transform.position; // Initialiser la dernière position
     }
 
     private void Update()
+    {
+        if (leader != null) // S'assurer que le leader est bien défini
+        {
+            FollowLeader();
+        }
+    }
+
+    private void FollowLeader()
     {
         float distance = Vector3.Distance(transform.position, leader.position);
 
         if (distance > followDistance)
         {
-            // Calculer la direction à suivre
+            // Déplacement vers le leader
             Vector3 direction = (leader.position - transform.position).normalized;
-
-            // Appliquer le mouvement normalisé pour garder une vitesse constante
             transform.position += direction * followSpeed * Time.deltaTime;
 
-            // Gestion du flip horizontal seulement
+            // Gestion du flip horizontal
             if (direction.x > 0)
             {
                 transform.localScale = new Vector3(1, 1, 1);
@@ -41,7 +44,7 @@ public class FollowerController : MonoBehaviour
                 transform.localScale = new Vector3(-1, 1, 1);
             }
 
-            // Animer "Dwarf"
+            // Animation du mouvement
             AnimateMovement(direction);
         }
         else
@@ -50,10 +53,8 @@ public class FollowerController : MonoBehaviour
         }
     }
 
-
     private void AnimateMovement(Vector3 direction)
     {
-        // Si "Dwarf" est en mouvement, activer l'animation de marche
         if (direction != Vector3.zero)
         {
             animator.SetBool("isWalking", true);
@@ -62,5 +63,10 @@ public class FollowerController : MonoBehaviour
         {
             animator.SetBool("isWalking", false);
         }
+    }
+
+    public void SetLeader(Transform newLeader)
+    {
+        leader = newLeader; // Permet de définir dynamiquement un nouveau leader
     }
 }
