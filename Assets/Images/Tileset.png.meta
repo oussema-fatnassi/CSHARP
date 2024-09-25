@@ -433,27 +433,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_0
-      rect:
-        serializedVersion: 2
-        x: 356
-        y: 166
-        width: 17
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 369a5b31ad4974c8db172924e652bd0e
-      internalID: -2140502310
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Elf_Idle1
       rect:
         serializedVersion: 2
@@ -462,7 +441,7 @@ TextureImporter:
         width: 15
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -483,7 +462,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -504,7 +483,7 @@ TextureImporter:
         width: 16
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -525,7 +504,7 @@ TextureImporter:
         width: 15
         height: 15
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -533,6 +512,90 @@ TextureImporter:
       bones: []
       spriteID: e428097d67b0349dc963935821dbe99d
       internalID: -2027357826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inventory
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 64
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9a36bde3e7fe49a5b2cc9f259c73cae
+      internalID: 632184148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Potion_Strength
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 162
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c5492ccadc344c089118dc60b1ce484
+      internalID: -456377621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Potion_Mana
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 162
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efe599b5fac8a47939b705d96281656f
+      internalID: -59518904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Potion_Health
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 162
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d60163ae8c034da292148ef3174fe9f
+      internalID: -220914807
       vertices: []
       indices: 
       edges: []
@@ -562,6 +625,7 @@ TextureImporter:
       Elf_Idle2: -1635787219
       Elf_Walk1: -1309383790
       Elf_Walk2: -2027357826
+      Inventory: 632184148
       Knight_Idle1: -12376242
       Knight_Idle2: -201289237
       Knight_Walk1: -1160988183
@@ -570,6 +634,9 @@ TextureImporter:
       Mage_Idle2: 862142427
       Mage_Walk1: -2011432309
       Mage_Walk2: 1462372146
+      Potion_Health: -220914807
+      Potion_Mana: -59518904
+      Potion_Strength: -456377621
       Tileset_0: -2140502310
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
