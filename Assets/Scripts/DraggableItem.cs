@@ -8,7 +8,16 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 {
     [HideInInspector]public Transform parentToReturnTo = null;
     public Image image;
+    [HideInInspector]public ConsumableItem consumableItem;
 
+    private void Start()
+    {
+        InitializeConsumableItem(consumableItem);
+    }
+    public void InitializeConsumableItem(ConsumableItem item)
+    {
+        image.sprite = item.image;
+    }
     public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("Begin Drag");
