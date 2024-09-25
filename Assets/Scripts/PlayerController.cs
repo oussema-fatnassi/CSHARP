@@ -29,7 +29,14 @@ public class PlayerController : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
 
-        Vector3 movement = new(horizontal, vertical, 0);
+        // Créer un vecteur de mouvement
+        Vector3 movement = new Vector3(horizontal, vertical, 0);
+
+        // Normaliser le vecteur de mouvement si nécessaire pour conserver une vitesse constante
+        if (movement.magnitude > 1)
+        {
+            movement = movement.normalized;
+        }
 
         // Flip player sprite based on movement direction
         if (movement.x > 0)
@@ -41,9 +48,10 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
         }
 
-        // Apply movement to the player's position
+        // Appliquer le mouvement à la position du joueur
         transform.position += speed * Time.deltaTime * movement;
     }
+
 
     private void Animate()
     {
