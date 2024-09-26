@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
     [SerializeField] 
     private float speed = 1;
@@ -12,10 +12,13 @@ public class PlayerController : MonoBehaviour
     private float horizontal;
     private float vertical;
 
+
+
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
+        Camera.main.GetComponent<CameraFollow>().SetTarget(this.transform);
     }
 
     private void FixedUpdate()
@@ -51,7 +54,6 @@ public class PlayerController : MonoBehaviour
         // Appliquer le mouvement à la position du joueur
         transform.position += speed * Time.deltaTime * movement;
     }
-
 
     private void Animate()
     {
