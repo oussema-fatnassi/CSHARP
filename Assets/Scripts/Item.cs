@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(fileName = "New Consumable Item", menuName = "Inventory/Consumable Item")]
-public class ConsumableItem : ScriptableObject
+public class Item : ScriptableObject
 {
     public TileBase tile;
     public Sprite image;
