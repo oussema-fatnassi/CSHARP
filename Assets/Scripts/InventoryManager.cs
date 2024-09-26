@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+    public static InventoryManager instance;
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
     private const int maxItemCount = 5; 
@@ -15,20 +16,16 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
-        // Check for user input (click)
         if (Input.GetMouseButtonDown(0)) // Left click
         {
-            // Detect which slot was clicked
             for (int i = 0; i < inventorySlots.Length; i++)
             {
                 if (IsSlotClicked(inventorySlots[i]))
                 {
-                    // Check if this is a double-click
                     if (Time.time - lastClickTime < doubleClickThreshold)
                     {
                         ChangeSelectedSlot(i);
                     }
-                    // Update the time of the last click
                     lastClickTime = Time.time;
                     break;
                 }
@@ -48,13 +45,15 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    // Helper method to determine if a specific slot was clicked
+    private void Awake()
+    {
+        instance = this;
+    }
+
     bool IsSlotClicked(InventorySlot slot)
     {
-        // Use the slot's RectTransform and check if the mouse is over it
         RectTransform slotRect = slot.GetComponent<RectTransform>();
         Vector2 mousePosition = Input.mousePosition;
-
         return RectTransformUtility.RectangleContainsScreenPoint(slotRect, mousePosition);
     }
 
