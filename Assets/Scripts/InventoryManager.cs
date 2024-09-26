@@ -151,4 +151,13 @@ public class InventoryManager : MonoBehaviour
         }
         return null;
     }
+
+    public void UseSelectedItem(){
+        Item receivedItem = GetSelectedItem(true);
+        if(receivedItem != null){
+            Debug.Log($"Selected item is {receivedItem.image.name}");
+        } else {
+            Debug.Log("No item selected");
+        }
+    }
 }
