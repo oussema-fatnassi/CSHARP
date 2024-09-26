@@ -10,7 +10,7 @@ public class InventoryManager : MonoBehaviour
     private const int maxItemCount = 5; 
     int selectedSlot = -1;
 
-    private float lastClickTime = 0f; // Store the time of the last click
+    private float lastClickTime = 0f;
     private const float doubleClickThreshold = 0.3f;
 
     private void Update()
@@ -133,5 +133,23 @@ public class InventoryManager : MonoBehaviour
             }
         }
         return false; 
+    }
+
+    public Item GetSelectedItem(bool use){
+        InventorySlot slot = inventorySlots[selectedSlot];
+        InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+        if(itemInSlot != null){
+            Item item = itemInSlot.item;
+            if(use == true){
+                itemInSlot.count--;
+                if(itemInSlot.count <= 0){
+                    Destroy(itemInSlot.gameObject);
+                } else {
+                    itemInSlot.RefreshCount();
+                }
+            }
+            return item;
+        }
+        return null;
     }
 }
