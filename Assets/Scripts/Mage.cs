@@ -2,20 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dragon : Player
+public class Mage : Player
 {
-   
     private void Awake()
     {
-        PlayerName = "Dragon";
-        Level = 1;
+        PlayerName = "Mage";
+        Level = 7;
         Health = 100;
         Damage = 20;
         Defense = 10;
         Speed = 10;
         Intelligence = 5;
         Precision = 5;
-        Experience = 54;
+        Experience = 53;
     }
 
     public override void defend()

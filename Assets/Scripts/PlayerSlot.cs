@@ -7,6 +7,9 @@ public class PlayerSlot : MonoBehaviour, IPointerClickHandler
     private GameObject instantiatedPrefab;
     private Player player;
 
+    // You can add a public property for the slot name
+    public string SlotName => gameObject.name; // Returns the name of the GameObject
+
     // Method to assign the player prefab and instantiate it in the UI
     public void SetPlayerPrefab(GameObject playerPrefab, Player playerData)
     {

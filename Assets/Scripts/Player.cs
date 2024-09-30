@@ -4,15 +4,15 @@ using UnityEngine;
 
 public abstract class Player : MonoBehaviour
 {
-    [SerializeField] protected string playerName;
-    [SerializeField] protected int level;
-    [SerializeField] protected int health;
-    [SerializeField] protected int damage;
-    [SerializeField] protected int defense;
-    [SerializeField] protected int speed;
-    [SerializeField] protected int intelligence;
-    [SerializeField] protected int precision;
-    [SerializeField] protected int experience;
+    protected string playerName;
+    protected int level;
+    protected int health;
+    protected int damage;
+    protected int defense;
+    protected int speed;
+    protected int intelligence;
+    protected int precision;
+    protected int experience;
 
     public string PlayerName { get => playerName; set => playerName = value; }
     public int Level { get => level; set => level = value; }
