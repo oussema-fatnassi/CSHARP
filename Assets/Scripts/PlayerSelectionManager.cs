@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Cinemachine;
+
 
 public class PlayerSelectionManager : MonoBehaviour
 {
@@ -10,9 +12,8 @@ public class PlayerSelectionManager : MonoBehaviour
     [SerializeField] private TMP_Text playerLevelText;
     [SerializeField] private TMP_Text playerExperienceText;
     [SerializeField] private PlayerSlot[] playerSlots;
-
+    [SerializeField] private CinemachineVirtualCameraBase playerCamera;
     private Player selectedPlayer;  
-
     public static PlayerSelectionManager Instance { get; private set; }
 
     private void Awake()
@@ -92,6 +93,7 @@ public class PlayerSelectionManager : MonoBehaviour
             GameObject newPlayer = Instantiate(selectedPlayer.gameObject, spawnPosition, spawnRotation);
 
             newPlayer.transform.SetParent(spawnPoint.transform);
+            playerCamera.Follow = newPlayer.transform;
         }
         else
         {

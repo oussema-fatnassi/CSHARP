@@ -236,10 +236,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dragon
       objectReference: {fileID: 0}
-    - target: {fileID: 684791500522595692, guid: 5d1f3450161384fc4a00e0ec27668666, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
     - target: {fileID: 6840384167980791319, guid: 5d1f3450161384fc4a00e0ec27668666, type: 3}
       propertyPath: inventoryManager
       value: 
@@ -26512,6 +26508,7 @@ MonoBehaviour:
   - {fileID: 1018664005}
   - {fileID: 327856542}
   - {fileID: 147703471}
+  playerCamera: {fileID: 140416532}
 --- !u!4 &631758202
 Transform:
   m_ObjectHideFlags: 0
@@ -31971,7 +31968,7 @@ Tilemap:
       - {fileID: -1298584458, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1611013161, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1072187944, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
-      m_AnimationSpeed: 2.9375157
+      m_AnimationSpeed: 2.4921718
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -45, y: -2, z: 0}
@@ -31983,7 +31980,7 @@ Tilemap:
       - {fileID: -1298584458, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1611013161, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1072187944, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
-      m_AnimationSpeed: 4.8659124
+      m_AnimationSpeed: 3.7616339
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -49, y: 7, z: 0}
@@ -31995,7 +31992,7 @@ Tilemap:
       - {fileID: -1298584458, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1611013161, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1072187944, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
-      m_AnimationSpeed: 4.663555
+      m_AnimationSpeed: 2.213051
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
