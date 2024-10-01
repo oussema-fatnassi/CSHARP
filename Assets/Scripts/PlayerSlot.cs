@@ -4,33 +4,45 @@ using UnityEngine.UI;
 
 public class PlayerSlot : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] private RectTransform iconArea; // The UI area where the prefab will be instantiated
+    [SerializeField] private RectTransform iconArea; 
     private GameObject instantiatedPrefab;
-    private Player player;  // Store the Player data
+    private Player player;  
     public Image image;
     public Color selectedColor, notSelectedColor;
 
+    public string SlotName => gameObject.name;
 
-    // Method to assign the player prefab and instantiate it in the UI
     public void SetPlayerPrefab(GameObject playerPrefab, Player playerData)
     {
-        // Clear the previous prefab
         if (instantiatedPrefab != null)
         {
             Destroy(instantiatedPrefab);
         }
 
         instantiatedPrefab = playerPrefab;
-        player = playerData;  // Store the player data for this slot
+        player = playerData;  
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.clickCount == 2)
         {
-            // Notify manager on double-click and show player stats
-            PlayerSelectionManager.Instance.ShowPlayerStats(player);
-            image.color = selectedColor;
+            if (player != null)
+            {
+                PlayerSelectionManager.Instance.ShowPlayerStats(player);
+                PlayerSelectionManager.Instance.SetSelectedSlot(this); // Notify the manager about the selected slot
+                image.color = selectedColor;
+            }
+            else
+            {
+                Debug.LogError("Player data is null in PlayerSlot.");
+            }
         }
+    }
+
+    // Method to reset color to notSelectedColor
+    public void ResetColor()
+    {
+        image.color = notSelectedColor;
     }
 }

@@ -26,7 +26,6 @@ public class PlayerCollector : MonoBehaviour
 
         if (tileBase != null)
         {
-            Debug.Log("Item found at position: " + gridPosition);
             Item collectedItem = GetItemFromTile(tileBase);
             if (collectedItem != null)
             {
@@ -35,10 +34,6 @@ public class PlayerCollector : MonoBehaviour
                     collectableTilemap.SetTile(gridPosition, null); 
                 }
             }
-        }
-        else
-        {
-            Debug.Log("No item found at this position.");
         }
     }
 

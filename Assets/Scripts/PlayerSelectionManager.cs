@@ -14,6 +14,7 @@ public class PlayerSelectionManager : MonoBehaviour
     [SerializeField] private PlayerSlot[] playerSlots;
     [SerializeField] private CinemachineVirtualCameraBase playerCamera;
     private Player selectedPlayer;  
+    private PlayerSlot currentSelectedSlot;
     public static PlayerSelectionManager Instance { get; private set; }
 
     private void Awake()
@@ -42,9 +43,41 @@ public class PlayerSelectionManager : MonoBehaviour
                 rectTransform.offsetMin = Vector2.zero;
                 rectTransform.offsetMax = Vector2.zero;
 
-                Player playerData = playerPrefabs[i].GetComponent<Player>();
+                // Get the name of the player slot
+                string slotName = playerSlots[i].SlotName; // Use the property to get the slot name
 
-                playerSlots[i].SetPlayerPrefab(playerIcon, playerData);
+                Player playerData = null;
+                // Check the slot name to determine which player type to instantiate
+                if (slotName.Contains("Dragon"))
+                {
+                    playerData = playerIcon.AddComponent<Dragon>();
+                }
+                else if (slotName.Contains("Dwarf"))
+                {
+                    playerData = playerIcon.AddComponent<Dwarf>(); // Assuming you have a Dwarf class
+                }
+                else if (slotName.Contains("Elf"))
+                {
+                    playerData = playerIcon.AddComponent<Elf>(); // Assuming you have an Elf class
+                }
+                else if (slotName.Contains("Knight"))
+                {
+                    playerData = playerIcon.AddComponent<Knight>(); // Assuming you have a Knight class
+                }
+                else if (slotName.Contains("Mage"))
+                {
+                    playerData = playerIcon.AddComponent<Mage>(); // Assuming you have a Mage class
+                }
+
+                // Ensure playerData is not null before assigning to the player slot
+                if (playerData != null)
+                {
+                    playerSlots[i].SetPlayerPrefab(playerIcon, playerData);
+                }
+                else
+                {
+                    Debug.LogError($"No valid player class found for slot: {slotName}");
+                }
             }
         }
     }
@@ -63,6 +96,17 @@ public class PlayerSelectionManager : MonoBehaviour
         playerExperienceText.text = "EXP: " + player.Experience.ToString();
 
         selectedPlayer = player; 
+    }
+    public void SetSelectedSlot(PlayerSlot slot)
+    {
+        // Reset the color of the previously selected slot
+        if (currentSelectedSlot != null)
+        {
+            currentSelectedSlot.ResetColor();
+        }
+
+        // Set the new selected slot
+        currentSelectedSlot = slot;
     }
 
     public void SpawnPlayer()
