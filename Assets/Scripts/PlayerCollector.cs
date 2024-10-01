@@ -34,14 +34,10 @@ public class PlayerCollector : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            Debug.Log("No item found at this position.");
-        }
     }
 
     // Method to get the corresponding Item from a tile
-// Method to get the corresponding Item from a tile
+    // Method to get the corresponding Item from a tile
     Item GetItemFromTile(TileBase tileBase)
     {
         // Cast the TileBase to Tile to access the sprite
