@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 2707861067514779099}
   - component: {fileID: 8465042460243257085}
   - component: {fileID: 2514282135008200407}
-  - component: {fileID: 8656656657076619730}
   - component: {fileID: 7837812724342437255}
   - component: {fileID: 7584698343429394075}
+  - component: {fileID: -4768175901683224736}
+  - component: {fileID: 6237758533976425704}
   m_Layer: 0
   m_Name: Mage
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 1048650318109047761}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.512, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -155,21 +156,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8656656657076619730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1048650318109047761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cceda1e5cbb0859499bed7f961318bf2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leader: {fileID: 0}
-  followDistance: 8
-  followSpeed: 5
 --- !u!50 &7837812724342437255
 Rigidbody2D:
   serializedVersion: 4
@@ -209,3 +195,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bdb0fcbabeab4effa40e94a56cd5504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-4768175901683224736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048650318109047761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bdcb0d74b0124329b2cd89d3d31c82c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectableTilemap: {fileID: 0}
+  inventoryManager: {fileID: 0}
+  collectableItems:
+  - {fileID: 11400000, guid: fca34e127979a4d83aee195c1cfdccc2, type: 2}
+  - {fileID: 11400000, guid: 1fefdffa08edf4ad28567b2b229cf0d9, type: 2}
+  - {fileID: 11400000, guid: 9a908ad46e35a4b51bb1127dd28fa132, type: 2}
+--- !u!114 &6237758533976425704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048650318109047761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 764c2a145cbf74dffaf8867adb7ab127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5

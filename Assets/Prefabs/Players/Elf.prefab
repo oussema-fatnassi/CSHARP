@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 3382357271532593455}
   - component: {fileID: 972282913269985353}
   - component: {fileID: 2925541738290749712}
-  - component: {fileID: 8351843415020823412}
   - component: {fileID: 5386840211226618957}
   - component: {fileID: 1922166165253629189}
+  - component: {fileID: 3743229250308668586}
+  - component: {fileID: 7213876797155139047}
   m_Layer: 0
   m_Name: Elf
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 5998798771860838386}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.673, y: -0.0205, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -155,21 +156,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.15, y: 0.16}
   m_EdgeRadius: 0
---- !u!114 &8351843415020823412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5998798771860838386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cceda1e5cbb0859499bed7f961318bf2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leader: {fileID: 0}
-  followDistance: 4
-  followSpeed: 5
 --- !u!50 &5386840211226618957
 Rigidbody2D:
   serializedVersion: 4
@@ -209,3 +195,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50336af458164a11911f8400e210d35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3743229250308668586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5998798771860838386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 764c2a145cbf74dffaf8867adb7ab127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+--- !u!114 &7213876797155139047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5998798771860838386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bdcb0d74b0124329b2cd89d3d31c82c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectableTilemap: {fileID: 0}
+  inventoryManager: {fileID: 0}
+  collectableItems:
+  - {fileID: 11400000, guid: fca34e127979a4d83aee195c1cfdccc2, type: 2}
+  - {fileID: 11400000, guid: 1fefdffa08edf4ad28567b2b229cf0d9, type: 2}
+  - {fileID: 11400000, guid: 9a908ad46e35a4b51bb1127dd28fa132, type: 2}
