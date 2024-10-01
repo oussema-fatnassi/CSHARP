@@ -226,12 +226,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cd168842e5b046ee85a7741adcc9ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: Dragon
-  level: 1
-  health: 0
-  damage: 0
-  defense: 0
-  speed: 0
-  intelligence: 0
-  precision: 0
-  experience: 66
