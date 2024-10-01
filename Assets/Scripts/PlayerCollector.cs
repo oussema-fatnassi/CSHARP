@@ -13,6 +13,12 @@ public class PlayerCollector : MonoBehaviour
         CollectItemAtPosition(playerPosition);
     }
 
+    private void Awake()
+    {
+        collectableTilemap = GameObject.Find("Collectables").GetComponent<Tilemap>();
+        inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
+    }
+
     void CollectItemAtPosition(Vector3 position)
     {
         Vector3Int gridPosition = collectableTilemap.WorldToCell(position);
