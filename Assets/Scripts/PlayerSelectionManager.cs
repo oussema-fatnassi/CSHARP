@@ -1,17 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class PlayerSelectionManager : MonoBehaviour
 {
-    [SerializeField] private List<Player> players;
-    [SerializeField] private List<GameObject> playerPrefabs;
+    [SerializeField] private List<GameObject> playerIconPrefabs; 
+    [SerializeField] private List<GameObject> playerPrefabs;     
     [SerializeField] private TMP_Text playerNameText;
     [SerializeField] private TMP_Text playerLevelText;
     [SerializeField] private TMP_Text playerExperienceText;
     [SerializeField] private PlayerSlot[] playerSlots;
+
+    private Player selectedPlayer;  
 
     public static PlayerSelectionManager Instance { get; private set; }
 
@@ -31,9 +31,9 @@ public class PlayerSelectionManager : MonoBehaviour
     {
         for (int i = 0; i < playerSlots.Length; i++)
         {
-            if (i < playerPrefabs.Count)
+            if (i < playerIconPrefabs.Count)
             {
-                GameObject playerIcon = Instantiate(playerPrefabs[i], playerSlots[i].transform);
+                GameObject playerIcon = Instantiate(playerIconPrefabs[i], playerSlots[i].transform);
                 RectTransform rectTransform = playerIcon.GetComponent<RectTransform>();
                 rectTransform.localScale = Vector3.one;
                 rectTransform.anchorMin = new Vector2(.2f, .2f);
@@ -41,46 +41,62 @@ public class PlayerSelectionManager : MonoBehaviour
                 rectTransform.offsetMin = Vector2.zero;
                 rectTransform.offsetMax = Vector2.zero;
 
-                // Get the name of the player slot
-                string slotName = playerSlots[i].name;
+                Player playerData = playerPrefabs[i].GetComponent<Player>();
 
-                Player player = null;
-                // Check the slot name to determine which player type to instantiate
-                if (slotName.Contains("Dragon"))
-                {
-                    player = playerIcon.AddComponent<Dragon>();
-                }
-                else if (slotName.Contains("Dwarf"))
-                {
-                    player = playerIcon.AddComponent<Dwarf>(); // Assuming you have a Dwarf class
-                }
-                else if (slotName.Contains("Elf"))
-                {
-                    player = playerIcon.AddComponent<Elf>(); // Assuming you have an Elf class
-                }
-                else if (slotName.Contains("Knight"))
-                {
-                    player = playerIcon.AddComponent<Knight>(); // Assuming you have a Knight class
-                }
-                else if (slotName.Contains("Mage"))
-                {
-                    player = playerIcon.AddComponent<Mage>(); // Assuming you have an Elf class
-                }
-
-                players.Add(player);
-                playerSlots[i].SetPlayerPrefab(playerIcon, player);
+                playerSlots[i].SetPlayerPrefab(playerIcon, playerData);
             }
         }
     }
 
-
-
     public void ShowPlayerStats(Player player)
     {
+        if (player == null)
+        {
+            Debug.LogError("No player selected!");
+            return;
+        }
+
         Debug.Log($"Showing stats for: {player.PlayerName}, Level: {player.Level}, Experience: {player.Experience}");
         playerNameText.text = player.PlayerName;
         playerLevelText.text = "LVL: " + player.Level.ToString();
         playerExperienceText.text = "EXP: " + player.Experience.ToString();
+
+        selectedPlayer = player; 
+    }
+
+    public void SpawnPlayer()
+    {
+        if (selectedPlayer == null)
+        {
+            Debug.LogError("No player selected!");
+            return;
+        }
+
+        GameObject spawnPoint = GameObject.FindWithTag("Player");
+
+        if (spawnPoint != null)
+        {
+            Vector3 spawnPosition = spawnPoint.transform.position;
+            Quaternion spawnRotation = spawnPoint.transform.rotation;
+
+            if (spawnPoint.transform.childCount > 0)
+            {
+                Transform currentPlayer = spawnPoint.transform.GetChild(0);
+
+                spawnPosition = currentPlayer.position;
+                spawnRotation = currentPlayer.rotation;
+
+                Destroy(currentPlayer.gameObject);
+            }
+
+            GameObject newPlayer = Instantiate(selectedPlayer.gameObject, spawnPosition, spawnRotation);
+
+            newPlayer.transform.SetParent(spawnPoint.transform);
+        }
+        else
+        {
+            Debug.LogError("No GameObject with tag 'Player' found!");
+        }
     }
 
 }
