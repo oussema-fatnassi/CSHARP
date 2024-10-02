@@ -8,11 +8,12 @@ public class PlayerSlot : MonoBehaviour, IPointerClickHandler
     private GameObject instantiatedPrefab;
     private Player player;  
     public Image image;
-    public Color selectedColor, notSelectedColor;
+    private int playerIndex;  // Store the index of the player
 
     public string SlotName => gameObject.name;
 
-    public void SetPlayerPrefab(GameObject playerPrefab, Player playerData)
+    // Method to set playerPrefab and player data, including the player index
+    public void SetPlayerPrefab(GameObject playerPrefab, Player playerData, int index)
     {
         if (instantiatedPrefab != null)
         {
@@ -21,17 +22,18 @@ public class PlayerSlot : MonoBehaviour, IPointerClickHandler
 
         instantiatedPrefab = playerPrefab;
         player = playerData;  
+        playerIndex = index;  // Store the player index for later use
     }
 
+    // Called when this slot is clicked
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.clickCount == 2)
+        if (eventData.clickCount == 2)  // Check for double-click
         {
             if (player != null)
             {
-                PlayerSelectionManager.Instance.ShowPlayerStats(player);
-                PlayerSelectionManager.Instance.SetSelectedSlot(this); // Notify the manager about the selected slot
-                image.color = selectedColor;
+                // Pass the player and its index to the selection manager
+                PlayerSelectionManager.Instance.ShowPlayerStats(player, playerIndex);
             }
             else
             {
@@ -40,9 +42,8 @@ public class PlayerSlot : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    // Method to reset color to notSelectedColor
-    public void ResetColor()
+    public Player GetPlayer()
     {
-        image.color = notSelectedColor;
+        return player;
     }
 }
