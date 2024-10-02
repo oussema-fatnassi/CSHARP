@@ -4,25 +4,22 @@ using UnityEngine;
 
 public abstract class Player : MonoBehaviour
 {
-    protected string playerName;
-    protected int level;
-    protected int health;
-    protected int damage;
-    protected int defense;
-    protected int speed;
-    protected int intelligence;
-    protected int precision;
-    protected int experience;
+    [SerializeField] protected PlayerStats stats;
 
-    public string PlayerName { get => playerName; set => playerName = value; }
-    public int Level { get => level; set => level = value; }
-    public int Health { get => health; set => health = value; }
-    public int Damage { get => damage; set => damage = value; }
-    public int Defense { get => defense; set => defense = value; }
-    public int Speed { get => speed; set => speed = value; }
-    public int Intelligence { get => intelligence; set => intelligence = value; }
-    public int Precision { get => precision; set => precision = value; }
-    public int Experience { get => experience; set => experience = value; }
+    public string PlayerName { get => stats.playerName; }
+    public int Level { get => stats.level; set => stats.level = value; }
+    public int Health { get => stats.health; set => stats.health = value; }
+    public int Damage { get => stats.damage; set => stats.damage = value; }
+    public int Defense { get => stats.defense; set => stats.defense = value; }
+    public int Speed { get => stats.speed; set => stats.speed = value; }
+    public int Intelligence { get => stats.intelligence; set => stats.intelligence = value; }
+    public int Precision { get => stats.precision; set => stats.precision = value; }
+    public int Experience { get => stats.experience; set => stats.experience = value; }
+
+    public void InitializePlayer(PlayerStats newStats)
+    {
+        stats = newStats;
+    }
 
     public abstract void lightAttack();
     public abstract void heavyAttack();
