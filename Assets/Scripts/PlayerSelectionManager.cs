@@ -3,7 +3,6 @@ using UnityEngine;
 using TMPro;
 using Cinemachine;
 
-
 public class PlayerSelectionManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> playerIconPrefabs; 
@@ -12,9 +11,11 @@ public class PlayerSelectionManager : MonoBehaviour
     [SerializeField] private TMP_Text playerLevelText;
     [SerializeField] private TMP_Text playerExperienceText;
     [SerializeField] private PlayerSlot[] playerSlots;
+    [SerializeField] private List<PlayerStats> playerStatsList; 
     [SerializeField] private CinemachineVirtualCameraBase playerCamera;
     private Player selectedPlayer;  
     private PlayerSlot currentSelectedSlot;
+    private GameObject selectedPlayerPrefab;
     public static PlayerSelectionManager Instance { get; private set; }
 
     private void Awake()
@@ -44,49 +45,63 @@ public class PlayerSelectionManager : MonoBehaviour
                 rectTransform.offsetMax = Vector2.zero;
 
                 // Get the name of the player slot
-                string slotName = playerSlots[i].SlotName; // Use the property to get the slot name
+                string slotName = playerSlots[i].SlotName;
 
                 Player playerData = null;
-                // Check the slot name to determine which player type to instantiate
+                PlayerStats playerStats = FindPlayerStats(slotName); // Get the corresponding PlayerStats
+
                 if (slotName.Contains("Dragon"))
                 {
                     playerData = playerIcon.AddComponent<Dragon>();
                 }
                 else if (slotName.Contains("Dwarf"))
                 {
-                    playerData = playerIcon.AddComponent<Dwarf>(); // Assuming you have a Dwarf class
+                    playerData = playerIcon.AddComponent<Dwarf>();
                 }
                 else if (slotName.Contains("Elf"))
                 {
-                    playerData = playerIcon.AddComponent<Elf>(); // Assuming you have an Elf class
+                    playerData = playerIcon.AddComponent<Elf>();
                 }
                 else if (slotName.Contains("Knight"))
                 {
-                    playerData = playerIcon.AddComponent<Knight>(); // Assuming you have a Knight class
+                    playerData = playerIcon.AddComponent<Knight>();
                 }
                 else if (slotName.Contains("Mage"))
                 {
-                    playerData = playerIcon.AddComponent<Mage>(); // Assuming you have a Mage class
+                    playerData = playerIcon.AddComponent<Mage>();
                 }
 
-                // Ensure playerData is not null before assigning to the player slot
-                if (playerData != null)
+                if (playerData != null && playerStats != null)
                 {
-                    playerSlots[i].SetPlayerPrefab(playerIcon, playerData);
+                    playerData.InitializePlayer(playerStats);
+                    playerSlots[i].SetPlayerPrefab(playerIcon, playerData, i); 
                 }
                 else
                 {
-                    Debug.LogError($"No valid player class found for slot: {slotName}");
+                    Debug.LogError($"No valid player class or stats found for slot: {slotName}");
                 }
             }
         }
     }
 
-    public void ShowPlayerStats(Player player)
+    private PlayerStats FindPlayerStats(string playerName)
     {
-        if (player == null)
+        foreach (PlayerStats stats in playerStatsList)
         {
-            Debug.LogError("No player selected!");
+            if (stats.playerName == playerName)
+            {
+                return stats; 
+            }
+        }
+        Debug.LogError($"No PlayerStats found for {playerName}");
+        return null;
+    }
+
+    public void ShowPlayerStats(Player player, int playerIndex)
+    {
+        if (player == null || playerIndex < 0 || playerIndex >= playerPrefabs.Count)
+        {
+            Debug.LogError("No valid player or playerIndex out of bounds!");
             return;
         }
 
@@ -95,18 +110,10 @@ public class PlayerSelectionManager : MonoBehaviour
         playerLevelText.text = "LVL: " + player.Level.ToString();
         playerExperienceText.text = "EXP: " + player.Experience.ToString();
 
+        selectedPlayerPrefab = playerPrefabs[playerIndex]; 
         selectedPlayer = player; 
-    }
-    public void SetSelectedSlot(PlayerSlot slot)
-    {
-        // Reset the color of the previously selected slot
-        if (currentSelectedSlot != null)
-        {
-            currentSelectedSlot.ResetColor();
-        }
 
-        // Set the new selected slot
-        currentSelectedSlot = slot;
+        Debug.Log("Selected player is now: " + selectedPlayer.PlayerName);
     }
 
     public void SpawnPlayer()
@@ -117,7 +124,9 @@ public class PlayerSelectionManager : MonoBehaviour
             return;
         }
 
-        GameObject spawnPoint = GameObject.FindWithTag("Player");
+        Debug.Log($"Spawning player: {selectedPlayer.PlayerName}");
+
+        GameObject spawnPoint = GameObject.FindWithTag("PlayerContainer");
 
         if (spawnPoint != null)
         {
@@ -127,22 +136,20 @@ public class PlayerSelectionManager : MonoBehaviour
             if (spawnPoint.transform.childCount > 0)
             {
                 Transform currentPlayer = spawnPoint.transform.GetChild(0);
-
                 spawnPosition = currentPlayer.position;
                 spawnRotation = currentPlayer.rotation;
-
                 Destroy(currentPlayer.gameObject);
             }
 
-            GameObject newPlayer = Instantiate(selectedPlayer.gameObject, spawnPosition, spawnRotation);
-
+            GameObject newPlayer = Instantiate(selectedPlayerPrefab.gameObject, spawnPosition, spawnRotation); 
             newPlayer.transform.SetParent(spawnPoint.transform);
             playerCamera.Follow = newPlayer.transform;
+
+            Debug.Log("Player spawned successfully!");
         }
         else
         {
             Debug.LogError("No GameObject with tag 'Player' found!");
         }
     }
-
 }
