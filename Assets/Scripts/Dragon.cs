@@ -4,19 +4,6 @@ using UnityEngine;
 
 public class Dragon : Player
 {
-   
-    private void Awake()
-    {
-        PlayerName = "Dragon";
-        Level = 1;
-        Health = 100;
-        Damage = 20;
-        Defense = 10;
-        Speed = 10;
-        Intelligence = 5;
-        Precision = 5;
-        Experience = 54;
-    }
 
     public override void defend()
     {

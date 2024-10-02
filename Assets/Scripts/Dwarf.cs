@@ -4,20 +4,6 @@ using UnityEngine;
 
 public class Dwarf : Player
 {
-   
-    private void Awake()
-    {
-        PlayerName = "Dwarf";
-        Level = 2;
-        Health = 100;
-        Damage = 20;
-        Defense = 10;
-        Speed = 10;
-        Intelligence = 5;
-        Precision = 5;
-        Experience = 23;
-    }
-
     public override void defend()
     {
         throw new System.NotImplementedException();

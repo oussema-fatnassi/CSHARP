@@ -4,19 +4,6 @@ using UnityEngine;
 
 public class Knight : Player
 {
-   
-    private void Awake()
-    {
-        PlayerName = "Knight";
-        Level = 6;
-        Health = 100;
-        Damage = 20;
-        Defense = 10;
-        Speed = 10;
-        Intelligence = 5;
-        Precision = 5;
-        Experience = 62;
-    }
 
     public override void defend()
     {

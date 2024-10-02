@@ -4,20 +4,6 @@ using UnityEngine;
 
 public class Elf : Player
 {
-   
-    private void Awake()
-    {
-        PlayerName = "Elf";
-        Level = 10;
-        Health = 100;
-        Damage = 20;
-        Defense = 10;
-        Speed = 10;
-        Intelligence = 5;
-        Precision = 5;
-        Experience = 4;
-    }
-
     public override void defend()
     {
         throw new System.NotImplementedException();
