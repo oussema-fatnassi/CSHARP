@@ -13,10 +13,12 @@ public class PlayerSelectionManager : MonoBehaviour
     [SerializeField] private PlayerSlot[] playerSlots;
     [SerializeField] private List<PlayerStats> playerStatsList; 
     [SerializeField] private CinemachineVirtualCameraBase playerCamera;
+    
     private Player selectedPlayer;  
-    private PlayerSlot currentSelectedSlot;
     private GameObject selectedPlayerPrefab;
     public static PlayerSelectionManager Instance { get; private set; }
+
+    private Dictionary<string, System.Type> playerClassMap;
 
     private void Awake()
     {
@@ -32,56 +34,69 @@ public class PlayerSelectionManager : MonoBehaviour
 
     private void Start()
     {
+        InitializePlayerClassMap();
+        SetupPlayerSlots();
+    }
+
+    private void InitializePlayerClassMap()
+    {
+        playerClassMap = new Dictionary<string, System.Type>
+        {
+            { "Dragon", typeof(Dragon) },
+            { "Dwarf", typeof(Dwarf) },
+            { "Elf", typeof(Elf) },
+            { "Knight", typeof(Knight) },
+            { "Mage", typeof(Mage) }
+        };
+    }
+
+    private void SetupPlayerSlots()
+    {
         for (int i = 0; i < playerSlots.Length; i++)
         {
-            if (i < playerIconPrefabs.Count)
+            if (i >= playerIconPrefabs.Count) continue;
+
+            GameObject playerIcon = CreatePlayerIcon(i);
+            PlayerStats playerStats = FindPlayerStats(playerSlots[i].SlotName);
+
+            if (playerStats == null) continue;
+
+            Player playerData = AddPlayerComponent(playerIcon, playerSlots[i].SlotName);
+            if (playerData != null)
             {
-                GameObject playerIcon = Instantiate(playerIconPrefabs[i], playerSlots[i].transform);
-                RectTransform rectTransform = playerIcon.GetComponent<RectTransform>();
-                rectTransform.localScale = Vector3.one;
-                rectTransform.anchorMin = new Vector2(.2f, .2f);
-                rectTransform.anchorMax = new Vector2(.8f, .8f);
-                rectTransform.offsetMin = Vector2.zero;
-                rectTransform.offsetMax = Vector2.zero;
-
-                // Get the name of the player slot
-                string slotName = playerSlots[i].SlotName;
-
-                Player playerData = null;
-                PlayerStats playerStats = FindPlayerStats(slotName); // Get the corresponding PlayerStats
-
-                if (slotName.Contains("Dragon"))
-                {
-                    playerData = playerIcon.AddComponent<Dragon>();
-                }
-                else if (slotName.Contains("Dwarf"))
-                {
-                    playerData = playerIcon.AddComponent<Dwarf>();
-                }
-                else if (slotName.Contains("Elf"))
-                {
-                    playerData = playerIcon.AddComponent<Elf>();
-                }
-                else if (slotName.Contains("Knight"))
-                {
-                    playerData = playerIcon.AddComponent<Knight>();
-                }
-                else if (slotName.Contains("Mage"))
-                {
-                    playerData = playerIcon.AddComponent<Mage>();
-                }
-
-                if (playerData != null && playerStats != null)
-                {
-                    playerData.InitializePlayer(playerStats);
-                    playerSlots[i].SetPlayerPrefab(playerIcon, playerData, i); 
-                }
-                else
-                {
-                    Debug.LogError($"No valid player class or stats found for slot: {slotName}");
-                }
+                playerData.InitializePlayer(playerStats);
+                playerSlots[i].SetPlayerPrefab(playerIcon, playerData, i); 
+            }
+            else
+            {
+                LogError($"No valid player class found for slot: {playerSlots[i].SlotName}");
             }
         }
+    }
+
+    private GameObject CreatePlayerIcon(int index)
+    {
+        GameObject playerIcon = Instantiate(playerIconPrefabs[index], playerSlots[index].transform);
+        RectTransform rectTransform = playerIcon.GetComponent<RectTransform>();
+        rectTransform.localScale = Vector3.one;
+        rectTransform.anchorMin = new Vector2(.2f, .2f);
+        rectTransform.anchorMax = new Vector2(.8f, .8f);
+        rectTransform.offsetMin = Vector2.zero;
+        rectTransform.offsetMax = Vector2.zero;
+
+        return playerIcon;
+    }
+
+    private Player AddPlayerComponent(GameObject playerIcon, string slotName)
+    {
+        foreach (var entry in playerClassMap)
+        {
+            if (slotName.Contains(entry.Key))
+            {
+                return playerIcon.AddComponent(entry.Value) as Player;
+            }
+        }
+        return null;
     }
 
     private PlayerStats FindPlayerStats(string playerName)
@@ -93,7 +108,7 @@ public class PlayerSelectionManager : MonoBehaviour
                 return stats; 
             }
         }
-        Debug.LogError($"No PlayerStats found for {playerName}");
+        LogError($"No PlayerStats found for {playerName}");
         return null;
     }
 
@@ -101,11 +116,10 @@ public class PlayerSelectionManager : MonoBehaviour
     {
         if (player == null || playerIndex < 0 || playerIndex >= playerPrefabs.Count)
         {
-            Debug.LogError("No valid player or playerIndex out of bounds!");
+            LogError("No valid player or playerIndex out of bounds!");
             return;
         }
 
-        Debug.Log($"Showing stats for: {player.PlayerName}, Level: {player.Level}, Experience: {player.Experience}");
         playerNameText.text = player.PlayerName;
         playerLevelText.text = "LVL: " + player.Level.ToString();
         playerExperienceText.text = "EXP: " + player.Experience.ToString();
@@ -113,43 +127,57 @@ public class PlayerSelectionManager : MonoBehaviour
         selectedPlayerPrefab = playerPrefabs[playerIndex]; 
         selectedPlayer = player; 
 
-        Debug.Log("Selected player is now: " + selectedPlayer.PlayerName);
+        Debug.Log($"Selected player is now: {selectedPlayer.PlayerName}");
     }
 
     public void SpawnPlayer()
     {
         if (selectedPlayer == null)
         {
-            Debug.LogError("No player selected!");
+            LogError("No player selected!");
             return;
         }
 
-        Debug.Log($"Spawning player: {selectedPlayer.PlayerName}");
-
+        Log($"Spawning player: {selectedPlayer.PlayerName}");
         GameObject spawnPoint = GameObject.FindWithTag("PlayerContainer");
 
         if (spawnPoint != null)
         {
-            Vector3 spawnPosition = spawnPoint.transform.position;
-            Quaternion spawnRotation = spawnPoint.transform.rotation;
-
-            if (spawnPoint.transform.childCount > 0)
-            {
-                Transform currentPlayer = spawnPoint.transform.GetChild(0);
-                spawnPosition = currentPlayer.position;
-                spawnRotation = currentPlayer.rotation;
-                Destroy(currentPlayer.gameObject);
-            }
-
-            GameObject newPlayer = Instantiate(selectedPlayerPrefab.gameObject, spawnPosition, spawnRotation); 
-            newPlayer.transform.SetParent(spawnPoint.transform);
-            playerCamera.Follow = newPlayer.transform;
-
-            Debug.Log("Player spawned successfully!");
+            SpawnAtPoint(spawnPoint);
         }
         else
         {
-            Debug.LogError("No GameObject with tag 'Player' found!");
+            LogError("No GameObject with tag 'Player' found!");
         }
+    }
+
+    private void SpawnAtPoint(GameObject spawnPoint)
+    {
+        Vector3 spawnPosition = spawnPoint.transform.position;
+        Quaternion spawnRotation = spawnPoint.transform.rotation;
+
+        if (spawnPoint.transform.childCount > 0)
+        {
+            Transform currentPlayer = spawnPoint.transform.GetChild(0);
+            spawnPosition = currentPlayer.position;
+            spawnRotation = currentPlayer.rotation;
+            Destroy(currentPlayer.gameObject);
+        }
+
+        GameObject newPlayer = Instantiate(selectedPlayerPrefab.gameObject, spawnPosition, spawnRotation); 
+        newPlayer.transform.SetParent(spawnPoint.transform);
+        playerCamera.Follow = newPlayer.transform;
+
+        Log("Player spawned successfully!");
+    }
+
+    private void Log(string message)
+    {
+        Debug.Log(message);
+    }
+
+    private void LogError(string message)
+    {
+        Debug.LogError(message);
     }
 }
