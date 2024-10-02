@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     private float horizontal;
     private float vertical;
 
+    // Flag to indicate if we are running tests
+    public bool IsTesting { get; set; } = false; // Default is false
+
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
@@ -25,8 +28,9 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
+        // Use MockInput if we are in testing mode, otherwise use Unity's Input
+        horizontal = IsTesting ? MockInput.GetAxis("Horizontal") : Input.GetAxis("Horizontal");
+        vertical = IsTesting ? MockInput.GetAxis("Vertical") : Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(horizontal, vertical, 0);
 
@@ -46,7 +50,6 @@ public class PlayerController : MonoBehaviour
 
         transform.position += speed * Time.deltaTime * movement;
     }
-
 
     private void Animate()
     {
