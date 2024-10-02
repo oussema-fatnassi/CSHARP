@@ -26537,9 +26537,15 @@ MonoBehaviour:
   playerSlots:
   - {fileID: 6853070032402438774}
   - {fileID: 1136235278}
-  - {fileID: 1018664005}
   - {fileID: 327856542}
   - {fileID: 147703471}
+  - {fileID: 1018664005}
+  playerStatsList:
+  - {fileID: 11400000, guid: 5600ccce0da8a4dee9f6dfd4d39a8c39, type: 2}
+  - {fileID: 11400000, guid: 714d4f17ba94646a1ac79aa52d594d71, type: 2}
+  - {fileID: 11400000, guid: cc69b798bdf054b40a2f15bf212951b9, type: 2}
+  - {fileID: 11400000, guid: 165890a5fc42b4125a4b52043e2da86a, type: 2}
+  - {fileID: 11400000, guid: d695cbbd6a73f4ddaa5fd2fa6fa0ed5e, type: 2}
   playerCamera: {fileID: 140416532}
 --- !u!4 &631758202
 Transform:
@@ -32000,7 +32006,7 @@ Tilemap:
       - {fileID: -1298584458, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1611013161, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1072187944, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
-      m_AnimationSpeed: 4.2126412
+      m_AnimationSpeed: 4.771399
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -45, y: -2, z: 0}
@@ -32012,7 +32018,7 @@ Tilemap:
       - {fileID: -1298584458, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1611013161, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1072187944, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
-      m_AnimationSpeed: 3.6976109
+      m_AnimationSpeed: 3.423243
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -49, y: 7, z: 0}
@@ -32024,7 +32030,7 @@ Tilemap:
       - {fileID: -1298584458, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1611013161, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1072187944, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
-      m_AnimationSpeed: 4.3825393
+      m_AnimationSpeed: 2.8492045
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
@@ -36540,7 +36546,7 @@ GameObject:
   - component: {fileID: 2054001034}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Player
+  m_TagString: PlayerContainer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
