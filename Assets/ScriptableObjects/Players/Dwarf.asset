@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: Dwarf
   health: 100
-  damage: 20
-  defense: 10
-  speed: 10
-  intelligence: 5
-  precision: 5
+  mana: 43
+  damage: 36
+  defense: 33
+  speed: 28
+  intelligence: 35
+  precision: 20
   experience: 23
-  level: 2
+  level: 11

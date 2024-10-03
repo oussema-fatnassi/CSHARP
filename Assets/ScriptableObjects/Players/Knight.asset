@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: Knight
   health: 100
-  damage: 20
-  defense: 10
-  speed: 10
-  intelligence: 5
-  precision: 5
-  experience: 62
-  level: 6
+  mana: 34
+  damage: 35
+  defense: 49
+  speed: 24
+  intelligence: 17
+  precision: 15
+  experience: 78
+  level: 14

@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: Elf
   health: 100
-  damage: 20
-  defense: 10
-  speed: 10
-  intelligence: 5
-  precision: 5
-  experience: 4
+  mana: 28
+  damage: 40
+  defense: 33
+  speed: 32
+  intelligence: 29
+  precision: 22
+  experience: 17
   level: 10
