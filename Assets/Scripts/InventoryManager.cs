@@ -152,12 +152,36 @@ public class InventoryManager : MonoBehaviour
         return null;
     }
 
-    public void UseSelectedItem(){
-        Item receivedItem = GetSelectedItem(true);
-        if(receivedItem != null){
-            Debug.Log($"Selected item is {receivedItem.image.name}");
-        } else {
-            Debug.Log("No item selected");
+    public void UseSelectedItem()
+    {
+        GameObject playerObject = GameObject.FindWithTag("Player");
+
+        if (playerObject != null)
+        {
+            Player player = playerObject.GetComponent<Player>();
+            if (player == null)
+            {
+                Debug.LogError("Player component is missing on the GameObject.");
+                return;
+            }
+
+            Item selectedItem = GetSelectedItem(true);
+            if (selectedItem != null)
+            {
+                Debug.Log($"Using {selectedItem.name} on {player.PlayerName}");
+                ItemConsumptionManager.instance.ConsumeItem(player, selectedItem);
+            }
+            else
+            {
+                Debug.LogError("No item selected or item unavailable.");
+            }
+        }
+        else
+        {
+            Debug.LogError("No player found in the scene.");
         }
     }
+
+
+
 }
