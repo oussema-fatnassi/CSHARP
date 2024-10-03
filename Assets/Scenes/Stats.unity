@@ -657,6 +657,42 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1288759240}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1861778322}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1288495387}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &197173343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25239,6 +25275,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1170615946}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 966469360}
+        m_TargetAssemblyTypeName: InventoryManager, Scripts
+        m_MethodName: ActivateMovement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &434348741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25252,7 +25312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.33333334}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.90588236}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -27260,6 +27320,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 966469360}
+        m_TargetAssemblyTypeName: InventoryManager, Scripts
+        m_MethodName: ActivateMovement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &726684673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27273,7 +27345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.69411767}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.90588236}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -33008,7 +33080,7 @@ Tilemap:
       - {fileID: -1298584458, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1611013161, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1072187944, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
-      m_AnimationSpeed: 2.5661378
+      m_AnimationSpeed: 2.7610664
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -45, y: -2, z: 0}
@@ -33020,7 +33092,7 @@ Tilemap:
       - {fileID: -1298584458, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1611013161, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1072187944, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
-      m_AnimationSpeed: 3.6418977
+      m_AnimationSpeed: 2.010634
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -49, y: 7, z: 0}
@@ -33032,7 +33104,7 @@ Tilemap:
       - {fileID: -1298584458, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1611013161, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1072187944, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
-      m_AnimationSpeed: 2.7640042
+      m_AnimationSpeed: 4.8233604
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
@@ -34531,6 +34603,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2889604700767432583, guid: 5e7c6a7930a75437580530eaddab1ea7, type: 3}
   m_PrefabInstance: {fileID: 1153750166}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1170615946 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2532829301540492636, guid: 5d1f3450161384fc4a00e0ec27668666, type: 3}
+  m_PrefabInstance: {fileID: 61763648}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 764c2a145cbf74dffaf8867adb7ab127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1221859407
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34889,6 +34972,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 966469360}
+        m_TargetAssemblyTypeName: InventoryManager, Scripts
+        m_MethodName: DeactivateMovement
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -36727,6 +36822,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 966469360}
+        m_TargetAssemblyTypeName: InventoryManager, Scripts
+        m_MethodName: DeactivateMovement
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

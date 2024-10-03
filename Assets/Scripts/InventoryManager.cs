@@ -182,6 +182,52 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public void DeactivateMovement()
+    {
+        GameObject playerObject = GameObject.FindWithTag("Player");
 
+        if (playerObject != null)
+        {
+            PlayerController playerController = playerObject.GetComponent<PlayerController>();
+            
+            if (playerController != null)
+            {
+                playerController.enabled = false;
+                Debug.Log("Player movement has been deactivated.");
+            }
+            else
+            {
+                Debug.LogError("PlayerController component is missing on the GameObject.");
+            }
+        }
+        else
+        {
+            Debug.LogError("No player found in the scene.");
+        }
+    }
+
+    public void ActivateMovement()
+    {
+        GameObject playerObject = GameObject.FindWithTag("Player");
+
+        if (playerObject != null)
+        {
+            PlayerController playerController = playerObject.GetComponent<PlayerController>();
+            
+            if (playerController != null)
+            {
+                playerController.enabled = true;
+                Debug.Log("Player movement has been activated.");
+            }
+            else
+            {
+                Debug.LogError("PlayerController component is missing on the GameObject.");
+            }
+        }
+        else
+        {
+            Debug.LogError("No player found in the scene.");
+        }
+    }
 
 }
