@@ -7,6 +7,7 @@ public class PlayerStats : ScriptableObject
 {
     public string playerName;
     public int health;
+    public int mana;
     public int damage;
     public int defense;
     public int speed;

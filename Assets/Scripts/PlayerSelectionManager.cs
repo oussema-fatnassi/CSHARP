@@ -7,18 +7,15 @@ public class PlayerSelectionManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> playerIconPrefabs; 
     [SerializeField] private List<GameObject> playerPrefabs;     
-    [SerializeField] private TMP_Text playerNameText;
-    [SerializeField] private TMP_Text playerLevelText;
-    [SerializeField] private TMP_Text playerExperienceText;
+    [SerializeField] private List<TMP_Text> playerStatsText;
     [SerializeField] private PlayerSlot[] playerSlots;
     [SerializeField] private List<PlayerStats> playerStatsList; 
     [SerializeField] private CinemachineVirtualCameraBase playerCamera;
-    
     private Player selectedPlayer;  
     private GameObject selectedPlayerPrefab;
     public static PlayerSelectionManager Instance { get; private set; }
-
     private Dictionary<string, System.Type> playerClassMap;
+    private Dictionary<TMP_Text, System.Func<PlayerStats, string>> statsTextMap;
 
     private void Awake()
     {
@@ -48,6 +45,34 @@ public class PlayerSelectionManager : MonoBehaviour
             { "Knight", typeof(Knight) },
             { "Mage", typeof(Mage) }
         };
+    }
+
+    private void InitializeStatsTextMap(PlayerStats stats)
+    {
+        statsTextMap = new Dictionary<TMP_Text, System.Func<PlayerStats, string>>();
+
+        Dictionary<string, System.Func<PlayerStats, string>> statMappings = new Dictionary<string, System.Func<PlayerStats, string>>
+        {
+            { "HealthText", s => "HP: " + s.health.ToString() },
+            { "ManaText", s => "Mana: " + s.mana.ToString() },
+            { "LevelText", s => "LVL: " + s.level.ToString() },
+            { "ExperienceText", s => "EXP: " + s.experience.ToString() },
+            { "DamageText", s => "Damage: " + s.damage.ToString() },
+            { "DefenseText", s => "Defense: " + s.defense.ToString() },
+            { "SpeedText", s => "Speed: " + s.speed.ToString() },
+            { "IntelligenceText", s => "Intelligence: " + s.intelligence.ToString() },
+            { "PrecisionText", s => "Precision: " + s.precision.ToString() },
+            { "PlayerNameText", s => s.playerName }
+        };
+
+        foreach (var mapping in statMappings)
+        {
+            TMP_Text textObj = playerStatsText.Find(t => t.name == mapping.Key);
+            if (textObj != null)
+            {
+                statsTextMap.Add(textObj, mapping.Value);
+            }
+        }
     }
 
     private void SetupPlayerSlots()
@@ -120,12 +145,28 @@ public class PlayerSelectionManager : MonoBehaviour
             return;
         }
 
-        playerNameText.text = player.PlayerName;
-        playerLevelText.text = "LVL: " + player.Level.ToString();
-        playerExperienceText.text = "EXP: " + player.Experience.ToString();
-
         selectedPlayerPrefab = playerPrefabs[playerIndex]; 
         selectedPlayer = player; 
+
+        PlayerStats stats = FindPlayerStats(player.PlayerName);
+        if (stats == null)
+        {
+            LogError("Player stats not found!");
+            return;
+        }
+
+        if (statsTextMap == null)
+        {
+            InitializeStatsTextMap(stats);
+        }
+
+        foreach (var entry in statsTextMap)
+        {
+            if (entry.Key != null) 
+            {
+                entry.Key.text = entry.Value(stats);
+            }
+        }
 
         Debug.Log($"Selected player is now: {selectedPlayer.PlayerName}");
     }
