@@ -168,7 +168,6 @@ public class InventoryManager : MonoBehaviour
             Item selectedItem = GetSelectedItem(true);
             if (selectedItem != null)
             {
-                Debug.Log($"Using {selectedItem.name} on {player.PlayerName}");
                 ItemConsumptionManager.instance.ConsumeItem(player, selectedItem);
             }
             else
