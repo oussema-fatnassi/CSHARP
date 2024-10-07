@@ -5,7 +5,6 @@ using UnityEngine;
 public class HPBar : MonoBehaviour
 {
     [SerializeField] GameObject health;
-    // Start is called before the first frame update
 
     public void SetHealth(float healthNormalized)
     {
