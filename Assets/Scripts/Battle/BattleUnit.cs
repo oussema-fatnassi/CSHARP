@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class BattleUnit : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] PlayerStats playerStats;
+    [SerializeField] BattleHud hud;
+    [SerializeField] bool isPlayerUnit;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public PlayerStats PlayerStats { get => playerStats; }
+
+    // public void Setup()
+    // {
+    //     hud.SetData(playerStats);
+    //     if (isPlayerUnit)
+    //     {
+    //         // GetComponent<BattlePlayer>().sprite = playerStats.Sprite;
+    //         playerStats.Health = playerStats.MaxHealth;
+    //         playerStats.Mana = playerStats.MaxMana;
+    //     }
+    // }
 }

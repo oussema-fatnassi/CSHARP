@@ -11,7 +11,7 @@ public class BattleHud : MonoBehaviour
     [SerializeField] HPBar hpBar;
     [SerializeField] ManaBar manaBar;
 
-    public void setData(Player player)
+    public void SetData(Player player)
     {
         nameText.text = player.PlayerName;
         levelText.text = "Lvl " + player.Level;
