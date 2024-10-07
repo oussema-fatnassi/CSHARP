@@ -1,0 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Enemy : MonoBehaviour
+{
+    [SerializeField] protected EnemyStats stats;
+
+    public string EnemyName { get => stats.enemyName; }
+    public int Health { get => stats.health; set => stats.health = value; }
+    public int Damage { get => stats.damage; set => stats.damage = value; }
+    public int Speed { get => stats.speed; set => stats.speed = value; }
+    public int Intelligence { get => stats.intelligence; set => stats.intelligence = value; }
+    public int Precision { get => stats.precision; set => stats.precision = value; }
+    public int ExperienceToGive { get => stats.experienceToGive; set => stats.experienceToGive = value; }
+    public int Level { get => stats.level; set => stats.level = value; }
+
+    public void InitializeEnemy(EnemyStats newStats)
+    {
+        stats = newStats;
+    }
+}
