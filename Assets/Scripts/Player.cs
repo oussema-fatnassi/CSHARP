@@ -9,7 +9,9 @@ public abstract class Player : MonoBehaviour
     public string PlayerName { get => stats.playerName; }
     public int Level { get => stats.level; set => stats.level = value; }
     public int Health { get => stats.health; set => stats.health = value; }
+    public int MaxHealth { get => stats.maxHealth; set => stats.maxHealth = value; }
     public int Mana { get => stats.mana; set => stats.mana = value; }
+    public int MaxMana { get => stats.maxMana; set => stats.maxMana = value; }
     public int Damage { get => stats.damage; set => stats.damage = value; }
     public int Defense { get => stats.defense; set => stats.defense = value; }
     public int Speed { get => stats.speed; set => stats.speed = value; }
