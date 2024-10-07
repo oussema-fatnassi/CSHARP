@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Dragon
   m_EditorClassIdentifier: 
   playerName: Dragon
-  health: 100
-  mana: 53
-  damage: 2
-  defense: 23
-  speed: 53
-  intelligence: 23
-  precision: 32
-  experience: 53
-  level: 3
+  health: 55
+  mana: 0
+  damage: 0
+  defense: 0
+  speed: 0
+  intelligence: 0
+  precision: 0
+  experience: 0
+  level: 0
