@@ -40,6 +40,7 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void SaveGame()
     {
+        
         foreach (IDataPersistence dataPersistenceObject in dataPersistenceObjects)
         {
             dataPersistenceObject.SaveData(ref gameData);

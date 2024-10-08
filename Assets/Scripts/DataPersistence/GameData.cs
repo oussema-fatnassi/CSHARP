@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [System.Serializable]
 public class GameData 
 {
     public Vector3 playerPosition;
+    public List<TileData> collectableTiles;
 
     public GameData()
     {
-        playerPosition = new Vector3(-66.3f, .75f, 0);
+        playerPosition = new Vector3(0, 0, 0);
+        collectableTiles = new List<TileData>();
     }
 }
