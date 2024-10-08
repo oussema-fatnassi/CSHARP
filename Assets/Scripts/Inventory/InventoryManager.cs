@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour, IDataPersistence
 {
     public static InventoryManager instance;
     public InventorySlot[] inventorySlots;
@@ -229,4 +229,34 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public void SaveData(ref GameData data)
+    {
+        data.inventoryItems.Clear(); // Clear existing data
+
+        foreach (var slot in inventorySlots)
+        {
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null)
+            {
+                // Create InventoryItemData and add it to GameData
+                InventoryItemData itemData = new InventoryItemData(itemInSlot.item.name, itemInSlot.count);
+                data.inventoryItems.Add(itemData);
+            }
+        }
+    }
+
+    public void LoadData(GameData data)
+    {
+        foreach (var itemData in data.inventoryItems)
+        {
+            Item item = Resources.Load<Item>($"Assets/ScriptableObjects/Consumable/{itemData.itemName}"); // Adjust the path accordingly
+            if (item != null)
+            {
+                for (int i = 0; i < itemData.count; i++)
+                {
+                    AddItem(item);
+                }
+            }
+        }
+    }
 }
