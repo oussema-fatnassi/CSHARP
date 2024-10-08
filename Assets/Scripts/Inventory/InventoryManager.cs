@@ -233,30 +233,68 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
     {
         data.inventoryItems.Clear(); // Clear existing data
 
-        foreach (var slot in inventorySlots)
+        for (int i = 0; i < inventorySlots.Length; i++)
         {
+            InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
             if (itemInSlot != null)
             {
-                // Create InventoryItemData and add it to GameData
-                InventoryItemData itemData = new InventoryItemData(itemInSlot.item.name, itemInSlot.count);
+                // Save the item name, count, and slot index
+                InventoryItemData itemData = new InventoryItemData(itemInSlot.item.name, itemInSlot.count, i);
                 data.inventoryItems.Add(itemData);
             }
         }
     }
 
+
     public void LoadData(GameData data)
     {
-        foreach (var itemData in data.inventoryItems)
+        Debug.Log("Loading inventory data...");
+
+        // Clear existing inventory items before loading
+        foreach (var slot in inventorySlots)
         {
-            Item item = Resources.Load<Item>($"Assets/ScriptableObjects/Consumable/{itemData.itemName}"); // Adjust the path accordingly
-            if (item != null)
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null)
             {
-                for (int i = 0; i < itemData.count; i++)
-                {
-                    AddItem(item);
-                }
+                Debug.Log($"Clearing slot: {slot.name}, removing item: {itemInSlot.item.name}");
+                Destroy(itemInSlot.gameObject); // Clear the slot
             }
         }
+
+        // Load the saved items into their respective slots
+        foreach (var itemData in data.inventoryItems)
+        {
+            Debug.Log($"Loading item: {itemData.itemName}, count: {itemData.count}, slot index: {itemData.slotIndex}");
+
+            // Ensure the slot index is valid
+            if (itemData.slotIndex < 0 || itemData.slotIndex >= inventorySlots.Length)
+            {
+                Debug.LogError($"Invalid slot index {itemData.slotIndex} for item {itemData.itemName}. Skipping...");
+                continue;
+            }
+
+            // Load the item from Resources
+            Item item = Resources.Load<Item>($"ScriptableObjects/Consumable/{itemData.itemName}"); // Adjust the path accordingly
+            if (item != null)
+            {
+                Debug.Log($"Successfully loaded item {item.name} from Resources.");
+
+                InventorySlot slot = inventorySlots[itemData.slotIndex];
+                for (int i = 0; i < itemData.count; i++)
+                {
+                    Debug.Log($"Adding item {item.name} to slot {itemData.slotIndex}");
+                    SpawnNewItem(item, slot); // Restore the item in the original slot
+                }
+            }
+            else
+            {
+                Debug.LogError($"Failed to load item {itemData.itemName} from Resources. Check the path or item existence.");
+            }
+        }
+
+        Debug.Log("Inventory load complete.");
     }
+
+
 }
