@@ -7,6 +7,7 @@ public class CameraManager : MonoBehaviour
 
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
     private CinemachineConfiner confiner;
+    private int orthoSize;
 
     private void Awake()
     {
@@ -15,6 +16,7 @@ public class CameraManager : MonoBehaviour
             Instance = this;
         }
         confiner = virtualCamera.GetComponent<CinemachineConfiner>();
+        orthoSize = (int)virtualCamera.m_Lens.OrthographicSize;
     }
 
     public void SetCameraBounds(Collider2D bounds)
@@ -22,7 +24,13 @@ public class CameraManager : MonoBehaviour
         if (confiner != null)
         {
             confiner.m_BoundingShape2D = bounds;
-            confiner.InvalidatePathCache(); // Refresh the confiner to apply the new bounds immediately
+            confiner.InvalidatePathCache(); 
         }
     }
+
+    public void SetOrthoSize(int size)
+    {
+        virtualCamera.m_Lens.OrthographicSize = size;
+    }
+
 }

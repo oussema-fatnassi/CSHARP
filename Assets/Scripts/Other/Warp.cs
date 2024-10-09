@@ -7,6 +7,7 @@ public class Warp : MonoBehaviour
     [SerializeField] private Transform destination;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private Collider2D newCameraBounds; // Set this to the new bounds for this warp area
+    [SerializeField] private int orthoSize;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -17,6 +18,7 @@ public class Warp : MonoBehaviour
 
             // Update the camera bounds
             CameraManager.Instance.SetCameraBounds(newCameraBounds);
+            CameraManager.Instance.SetOrthoSize(orthoSize);
         }
     }
 }
