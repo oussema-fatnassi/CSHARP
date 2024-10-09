@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IDataPersistence
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] 
     private float speed = 1;
@@ -61,15 +61,5 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         {
             animator.SetBool("isWalking", false);
         }
-    }
-
-    public void LoadData(GameData data)
-    {
-        this.transform.position = data.playerPosition;
-    }
-
-    public void SaveData(ref GameData data)
-    {
-        data.playerPosition = this.transform.position;
     }
 }

@@ -10,7 +10,6 @@ public class GameData
     public List<TileData> collectableTiles;
     public List<InventoryItemData> inventoryItems;
     public string playerName;
-
     public GameData()
     {
         playerPosition = new Vector3(0, 0, 0);

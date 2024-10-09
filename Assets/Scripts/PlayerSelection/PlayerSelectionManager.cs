@@ -224,11 +224,10 @@ public class PlayerSelectionManager : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
-        if (selectedPlayer != null)
-        {
-            data.playerName = selectedPlayer.PlayerName; 
-            Debug.Log($"Saving player: {data.playerName}");
-        }
+        string name = GameObject.FindWithTag("PlayerContainer").transform.GetChild(0).name;
+        name = name.Replace("(Clone)", "").Trim();
+        data.playerName = name;
+        data.playerPosition = GameObject.FindWithTag("PlayerContainer").transform.GetChild(0).position;
     }
 
     public void LoadData(GameData data)
