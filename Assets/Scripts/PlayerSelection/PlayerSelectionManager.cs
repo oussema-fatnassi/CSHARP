@@ -258,7 +258,7 @@ public class PlayerSelectionManager : MonoBehaviour, IDataPersistence
         }
         else
         {
-            Debug.LogError($"No player prefab found with name: {data.playerName}");
+            data.playerName = "Dragon";
         }
     }
 }
