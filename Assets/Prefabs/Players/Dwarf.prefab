@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1551398819403847712}
   - component: {fileID: 7667670517167003839}
   - component: {fileID: 5203483457113925327}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Dwarf
   m_TagString: Player
   m_Icon: {fileID: 0}
