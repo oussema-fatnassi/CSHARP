@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6990000400642173366}
   - component: {fileID: 8354450176344713211}
   - component: {fileID: 91460288750926391}
+  - component: {fileID: 5290700216004611193}
   m_Layer: 0
   m_Name: Stone
   m_TagString: Untagged
@@ -171,11 +172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  dialoguePanel: {fileID: 0}
-  dialogueText: {fileID: 0}
-  dialogue:
-  - ENEMY ENCOUNTERED
-  wordSpeed: 5
 --- !u!50 &8354450176344713211
 Rigidbody2D:
   serializedVersion: 4
@@ -248,3 +244,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5290700216004611193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3012603987087796830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6ec9cd1cde805a4db792c260ee43a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
