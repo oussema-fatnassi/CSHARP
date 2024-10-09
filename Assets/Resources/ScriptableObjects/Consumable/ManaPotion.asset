@@ -9,16 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55bde0978d1884a28943b1b4575fd998, type: 3}
-  m_Name: Dragon
+  m_Script: {fileID: 11500000, guid: ee1552d241568445a8f8c55762886d77, type: 3}
+  m_Name: ManaPotion
   m_EditorClassIdentifier: 
-  playerName: Dragon
-  health: 55
-  mana: 0
-  damage: 0
-  defense: 0
-  speed: 0
-  intelligence: 0
-  precision: 0
-  experience: 0
-  level: 0
+  name: Health
+  type: 1
+  value: 40
+  tile: {fileID: 0}
+  image: {fileID: -59518904, guid: ea0c139ec37a845e79aecdc17ca9c226, type: 3}
+  stackable: 1

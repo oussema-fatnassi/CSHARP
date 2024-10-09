@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour, IDataPersistence
 {
     public static InventoryManager instance;
     public InventorySlot[] inventorySlots;
@@ -229,4 +229,56 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public void SaveData(ref GameData data)
+    {
+        data.inventoryItems.Clear(); 
+
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            InventorySlot slot = inventorySlots[i];
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null)
+            {
+                InventoryItemData itemData = new InventoryItemData(itemInSlot.item.name, itemInSlot.count, i);
+                data.inventoryItems.Add(itemData);
+            }
+        }
+    }
+
+
+    public void LoadData(GameData data)
+    {
+        foreach (var slot in inventorySlots)
+        {
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null)
+            {
+                Destroy(itemInSlot.gameObject); 
+            }
+        }
+
+        foreach (var itemData in data.inventoryItems)
+        {
+            if (itemData.slotIndex < 0 || itemData.slotIndex >= inventorySlots.Length)
+            {
+                continue;
+            }
+
+            Item item = Resources.Load<Item>($"ScriptableObjects/Consumable/{itemData.itemName}"); // Adjust the path accordingly
+            if (item != null)
+            {
+                InventorySlot slot = inventorySlots[itemData.slotIndex];
+                GameObject newItem = Instantiate(inventoryItemPrefab, slot.transform);
+                InventoryItem inventoryItem = newItem.GetComponent<InventoryItem>();
+                inventoryItem.InitializeItem(item);
+
+                inventoryItem.count = itemData.count;
+                inventoryItem.RefreshCount();
+            }
+            else
+            {
+                Debug.LogError($"Failed to load item {itemData.itemName} from Resources. Check the path or item existence.");
+            }
+        }
+    }
 }

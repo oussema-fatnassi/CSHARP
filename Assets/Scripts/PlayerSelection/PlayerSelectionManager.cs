@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro;
 using Cinemachine;
 
-public class PlayerSelectionManager : MonoBehaviour
+public class PlayerSelectionManager : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private List<GameObject> playerIconPrefabs; 
     [SerializeField] private List<GameObject> playerPrefabs;     
@@ -220,5 +220,45 @@ public class PlayerSelectionManager : MonoBehaviour
     private void LogError(string message)
     {
         Debug.LogError(message);
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        string name = GameObject.FindWithTag("PlayerContainer").transform.GetChild(0).name;
+        name = name.Replace("(Clone)", "").Trim();
+        data.playerName = name;
+        data.playerPosition = GameObject.FindWithTag("PlayerContainer").transform.GetChild(0).position;
+    }
+
+    public void LoadData(GameData data)
+    {
+        GameObject prefabToInstantiate = playerPrefabs.Find(prefab => prefab.name == data.playerName);
+        if (prefabToInstantiate != null)
+        {
+            GameObject spawnPoint = GameObject.FindWithTag("PlayerContainer");
+
+            if (spawnPoint != null)
+            {
+                if (spawnPoint.transform.childCount > 0)
+                {
+                    foreach (Transform child in spawnPoint.transform)
+                    {
+                        Destroy(child.gameObject);
+                    }
+                }
+                GameObject playerInstance = Instantiate(prefabToInstantiate, data.playerPosition, Quaternion.identity); 
+                playerInstance.transform.SetParent(spawnPoint.transform); 
+                playerCamera.Follow = playerInstance.transform;
+                Debug.Log($"Loaded player: {data.playerName} at position: {data.playerPosition}");
+            }
+            else
+            {
+                Debug.LogError("No GameObject with tag 'PlayerContainer' found!");
+            }
+        }
+        else
+        {
+            data.playerName = "Dragon";
+        }
     }
 }
