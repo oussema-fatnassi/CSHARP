@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1984089068523783389}
   - component: {fileID: 5366464189866186799}
   - component: {fileID: 4923053463065264608}
+  - component: {fileID: 838533804736604501}
   m_Layer: 0
   m_Name: Trooper
   m_TagString: Untagged
@@ -171,11 +172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  dialoguePanel: {fileID: 0}
-  dialogueText: {fileID: 0}
-  dialogue:
-  - ENEMY ENCOUNTERED
-  wordSpeed: 5
 --- !u!50 &5366464189866186799
 Rigidbody2D:
   serializedVersion: 4
@@ -248,3 +244,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &838533804736604501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5458640760174304226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6ec9cd1cde805a4db792c260ee43a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
