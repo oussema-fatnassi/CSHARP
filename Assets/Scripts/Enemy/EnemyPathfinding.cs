@@ -6,12 +6,6 @@ using TMPro;
 public class EnemyPathfinding : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 2f;
-    [SerializeField] GameObject dialoguePanel;
-    [SerializeField] TMP_Text dialogueText;
-    [SerializeField] string[] dialogue;
-
-    private int index;
-    public float wordSpeed;
     private Rigidbody2D rb;
     private Vector2 moveDir;
 
@@ -34,16 +28,6 @@ public class EnemyPathfinding : MonoBehaviour
             // Here, we stop the monster's movement or make it turn around
             StopMovingOrChangeDirection();
         }
-
-        if (collision.CompareTag("Player")) {
-            // The monster collided with the player
-            // Here, we stop the monster's movement or make it turn around
-            // Display dialogue panel
-            dialoguePanel.SetActive(true);
-            StartCoroutine(Typing());
-            StartCoroutine(WaitForNextLine());
-            Destroy(gameObject);
-        }
     }
 
     // Stop the movement or change the direction of the monster
@@ -54,36 +38,5 @@ public class EnemyPathfinding : MonoBehaviour
         // Alternatively, to change direction, generate a new roam position:
         Vector2 newDirection = -moveDir; // Reverse the current direction to go back the way it came from
         MoveTo(newDirection); // Change direction to roam somewhere else
-    }
-
-    IEnumerator Typing()
-    {
-        foreach (char letter in dialogue[index].ToCharArray())
-        {
-            dialogueText.text += letter;
-            yield return new WaitForSeconds(wordSpeed);
-        }
-    }
-
-    public IEnumerator WaitForNextLine()
-    {
-        while (true)
-        {
-            if (dialogueText.text == dialogue[index])
-            {
-                if (index < dialogue.Length - 1)
-                {
-                    index++;
-                    dialogueText.text = "";
-                    StartCoroutine(Typing());
-                }
-                else
-                {
-                    dialogueText.text = "";
-                    index = 0;
-                }
-            }
-            yield return null;
-        }
     }
 }
