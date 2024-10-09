@@ -393,14 +393,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Undead
       objectReference: {fileID: 0}
-    - target: {fileID: 5660148867034424823, guid: 12a883b58cae6f840a904837d84258af, type: 3}
-      propertyPath: dialogueText
-      value: 
-      objectReference: {fileID: 1628097171}
-    - target: {fileID: 5660148867034424823, guid: 12a883b58cae6f840a904837d84258af, type: 3}
-      propertyPath: dialoguePanel
-      value: 
-      objectReference: {fileID: 1568693102}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -80208,14 +80200,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9913263}
     m_Modifications:
-    - target: {fileID: 254093162046631286, guid: 5af6e984efe40be4eafd4457687dad3a, type: 3}
-      propertyPath: dialogueText
-      value: 
-      objectReference: {fileID: 1628097171}
-    - target: {fileID: 254093162046631286, guid: 5af6e984efe40be4eafd4457687dad3a, type: 3}
-      propertyPath: dialoguePanel
-      value: 
-      objectReference: {fileID: 1568693102}
     - target: {fileID: 3518739336946555181, guid: 5af6e984efe40be4eafd4457687dad3a, type: 3}
       propertyPath: m_Name
       value: Frost
@@ -81367,6 +81351,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1696407421}
     m_Modifications:
+    - target: {fileID: 2039489523140345364, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+      propertyPath: dialoguePanel
+      value: 
+      objectReference: {fileID: 1568693102}
     - target: {fileID: 6147650429697732926, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
       propertyPath: m_LocalPosition.x
       value: -86.63
@@ -81700,13 +81688,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1696407421}
     m_Modifications:
+    - target: {fileID: 2039489523140345364, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+      propertyPath: dialogueText
+      value: 
+      objectReference: {fileID: 1628097171}
+    - target: {fileID: 2039489523140345364, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+      propertyPath: dialoguePanel
+      value: 
+      objectReference: {fileID: 1568693102}
     - target: {fileID: 6147650429697732926, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -74.79
+      value: -77.02
       objectReference: {fileID: 0}
     - target: {fileID: 6147650429697732926, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 111.75
+      value: 118.82
       objectReference: {fileID: 0}
     - target: {fileID: 6147650429697732926, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
       propertyPath: m_LocalPosition.z
@@ -81744,14 +81740,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Venom (38)
       objectReference: {fileID: 0}
-    - target: {fileID: 9196648166142025382, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
-      propertyPath: dialogueText
-      value: 
-      objectReference: {fileID: 1628097171}
-    - target: {fileID: 9196648166142025382, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
-      propertyPath: dialoguePanel
-      value: 
-      objectReference: {fileID: 1568693102}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -82164,14 +82152,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9913263}
     m_Modifications:
-    - target: {fileID: 1215140335772817203, guid: ec5d0e833628dfc4da9fe905e341eb82, type: 3}
-      propertyPath: dialogueText
-      value: 
-      objectReference: {fileID: 1628097171}
-    - target: {fileID: 1215140335772817203, guid: ec5d0e833628dfc4da9fe905e341eb82, type: 3}
-      propertyPath: dialoguePanel
-      value: 
-      objectReference: {fileID: 1568693102}
     - target: {fileID: 1513331043179973205, guid: ec5d0e833628dfc4da9fe905e341eb82, type: 3}
       propertyPath: m_Name
       value: Assassin
@@ -83500,14 +83480,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9913263}
     m_Modifications:
-    - target: {fileID: 909233647673629296, guid: 7187fc183dcc10e409660e0fc358cdfc, type: 3}
-      propertyPath: dialogueText
-      value: 
-      objectReference: {fileID: 1628097171}
-    - target: {fileID: 909233647673629296, guid: 7187fc183dcc10e409660e0fc358cdfc, type: 3}
-      propertyPath: dialoguePanel
-      value: 
-      objectReference: {fileID: 1568693102}
     - target: {fileID: 5019713119135076377, guid: 7187fc183dcc10e409660e0fc358cdfc, type: 3}
       propertyPath: m_Name
       value: Cursed
@@ -87326,7 +87298,7 @@ Tilemap:
       - {fileID: -1298584458, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1611013161, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1072187944, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
-      m_AnimationSpeed: 4.785153
+      m_AnimationSpeed: 4.5422416
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -45, y: -2, z: 0}
@@ -87338,7 +87310,7 @@ Tilemap:
       - {fileID: -1298584458, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1611013161, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1072187944, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
-      m_AnimationSpeed: 3.0230813
+      m_AnimationSpeed: 4.023769
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -49, y: 7, z: 0}
@@ -87350,7 +87322,7 @@ Tilemap:
       - {fileID: -1298584458, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1611013161, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1072187944, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
-      m_AnimationSpeed: 2.6536765
+      m_AnimationSpeed: 4.551379
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
@@ -105526,6 +105498,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1696407421}
     m_Modifications:
+    - target: {fileID: 2039489523140345364, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+      propertyPath: dialoguePanel
+      value: 
+      objectReference: {fileID: 1568693102}
     - target: {fileID: 6147650429697732926, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
       propertyPath: m_LocalPosition.x
       value: -82.14
@@ -105875,6 +105851,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9913263}
     m_Modifications:
+    - target: {fileID: 2039489523140345364, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+      propertyPath: dialogueText
+      value: 
+      objectReference: {fileID: 1628097171}
+    - target: {fileID: 2039489523140345364, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+      propertyPath: dialoguePanel
+      value: 
+      objectReference: {fileID: 1568693102}
     - target: {fileID: 6147650429697732926, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.19006
@@ -105919,19 +105903,81 @@ PrefabInstance:
       propertyPath: m_Name
       value: Venom
       objectReference: {fileID: 0}
-    - target: {fileID: 9196648166142025382, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
-      propertyPath: dialogueText
-      value: 
-      objectReference: {fileID: 1628097171}
-    - target: {fileID: 9196648166142025382, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
-      propertyPath: dialoguePanel
-      value: 
-      objectReference: {fileID: 1568693102}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+--- !u!1001 &1191677861
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1696407421}
+    m_Modifications:
+    - target: {fileID: 2039489523140345364, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+      propertyPath: dialogueText
+      value: 
+      objectReference: {fileID: 1628097171}
+    - target: {fileID: 2039489523140345364, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+      propertyPath: dialoguePanel
+      value: 
+      objectReference: {fileID: 1568693102}
+    - target: {fileID: 6147650429697732926, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -73
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147650429697732926, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 119.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147650429697732926, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147650429697732926, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147650429697732926, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147650429697732926, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147650429697732926, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147650429697732926, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147650429697732926, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147650429697732926, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7257549230140316505, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+      propertyPath: m_Name
+      value: Venom (41)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+--- !u!4 &1191677862 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6147650429697732926, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+  m_PrefabInstance: {fileID: 1191677861}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1217674697 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6147650429697732926, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
@@ -117417,14 +117463,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1408366410539092429, guid: d6772ff0e39a2154ba043d6a841d8f5d, type: 3}
-      propertyPath: dialogueText
-      value: 
-      objectReference: {fileID: 1628097171}
-    - target: {fileID: 1408366410539092429, guid: d6772ff0e39a2154ba043d6a841d8f5d, type: 3}
-      propertyPath: dialoguePanel
-      value: 
-      objectReference: {fileID: 1568693102}
     - target: {fileID: 9117251350219154211, guid: d6772ff0e39a2154ba043d6a841d8f5d, type: 3}
       propertyPath: m_Name
       value: Wraith
@@ -118377,6 +118415,7 @@ Transform:
   - {fileID: 1412892682}
   - {fileID: 1979202486}
   - {fileID: 629538862}
+  - {fileID: 1191677862}
   - {fileID: 552172288}
   - {fileID: 133485393}
   - {fileID: 1860688186}
@@ -121853,6 +121892,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1696407421}
     m_Modifications:
+    - target: {fileID: 2039489523140345364, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
+      propertyPath: dialoguePanel
+      value: 
+      objectReference: {fileID: 1568693102}
     - target: {fileID: 6147650429697732926, guid: 4d1c995cbced28646862ce143f6a5974, type: 3}
       propertyPath: m_LocalPosition.x
       value: -62.4
@@ -128429,14 +128472,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9913263}
     m_Modifications:
-    - target: {fileID: 390681946689308480, guid: 44eb109e7fc21db45bc200b2c25d90b9, type: 3}
-      propertyPath: dialogueText
-      value: 
-      objectReference: {fileID: 1628097171}
-    - target: {fileID: 390681946689308480, guid: 44eb109e7fc21db45bc200b2c25d90b9, type: 3}
-      propertyPath: dialoguePanel
-      value: 
-      objectReference: {fileID: 1568693102}
     - target: {fileID: 5636485563864834543, guid: 44eb109e7fc21db45bc200b2c25d90b9, type: 3}
       propertyPath: m_Name
       value: Goblin
@@ -129375,14 +129410,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6990000400642173366, guid: 7d17e2c3870ef3a4988022765a690dc4, type: 3}
-      propertyPath: dialogueText
-      value: 
-      objectReference: {fileID: 1628097171}
-    - target: {fileID: 6990000400642173366, guid: 7d17e2c3870ef3a4988022765a690dc4, type: 3}
-      propertyPath: dialoguePanel
-      value: 
-      objectReference: {fileID: 1568693102}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -129396,14 +129423,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9913263}
     m_Modifications:
-    - target: {fileID: 1984089068523783389, guid: eaac0ba5599e8ef43b2136d4ddbf0d3c, type: 3}
-      propertyPath: dialogueText
-      value: 
-      objectReference: {fileID: 1628097171}
-    - target: {fileID: 1984089068523783389, guid: eaac0ba5599e8ef43b2136d4ddbf0d3c, type: 3}
-      propertyPath: dialoguePanel
-      value: 
-      objectReference: {fileID: 1568693102}
     - target: {fileID: 4868450291736994510, guid: eaac0ba5599e8ef43b2136d4ddbf0d3c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -21.159946
