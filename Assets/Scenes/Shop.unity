@@ -6305,6 +6305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 281977712}
   - component: {fileID: 281977713}
+  - component: {fileID: 281977714}
   m_Layer: 7
   m_Name: HealthPotionCollider
   m_TagString: Untagged
@@ -6372,6 +6373,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5226593, y: 1.5226641}
   m_EdgeRadius: 0
+--- !u!114 &281977714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281977711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49aa9c8d70d094d3aa21e327703ef990, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopManager: {fileID: 1044267475}
+  item: {fileID: 11400000, guid: fca34e127979a4d83aee195c1cfdccc2, type: 2}
 --- !u!1001 &310191177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6577,6 +6592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopManager: {fileID: 1044267475}
+  item: {fileID: 11400000, guid: 1fefdffa08edf4ad28567b2b229cf0d9, type: 2}
 --- !u!1001 &327856540
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6700,6 +6716,7 @@ GameObject:
   m_Component:
   - component: {fileID: 329480114}
   - component: {fileID: 329480113}
+  - component: {fileID: 329480115}
   m_Layer: 7
   m_Name: SpeedPotionCollider
   m_TagString: Untagged
@@ -6767,6 +6784,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1140720641}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &329480115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329480112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49aa9c8d70d094d3aa21e327703ef990, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopManager: {fileID: 1044267475}
+  item: {fileID: 11400000, guid: 9a908ad46e35a4b51bb1127dd28fa132, type: 2}
 --- !u!1 &332871853
 GameObject:
   m_ObjectHideFlags: 0
@@ -39309,7 +39340,7 @@ Tilemap:
       - {fileID: -1298584458, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1611013161, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1072187944, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
-      m_AnimationSpeed: 2.9266882
+      m_AnimationSpeed: 4.620091
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -45, y: -2, z: 0}
@@ -39321,7 +39352,7 @@ Tilemap:
       - {fileID: -1298584458, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1611013161, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1072187944, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
-      m_AnimationSpeed: 3.0140219
+      m_AnimationSpeed: 2.1482592
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -49, y: 7, z: 0}
@@ -39333,7 +39364,7 @@ Tilemap:
       - {fileID: -1298584458, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1611013161, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
       - {fileID: 1072187944, guid: 81eef5d3bd8c6433c8deca53a52aa273, type: 3}
-      m_AnimationSpeed: 4.831228
+      m_AnimationSpeed: 4.756157
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
@@ -40814,10 +40845,6 @@ MonoBehaviour:
   itemName: {fileID: 2012090119}
   itemPrice: {fileID: 85569424}
   itemDescription: {fileID: 211706066}
-  items:
-  - {fileID: 11400000, guid: fca34e127979a4d83aee195c1cfdccc2, type: 2}
-  - {fileID: 11400000, guid: 1fefdffa08edf4ad28567b2b229cf0d9, type: 2}
-  - {fileID: 11400000, guid: 9a908ad46e35a4b51bb1127dd28fa132, type: 2}
 --- !u!1 &1049893201
 GameObject:
   m_ObjectHideFlags: 0
