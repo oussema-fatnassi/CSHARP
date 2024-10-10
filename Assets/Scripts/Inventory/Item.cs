@@ -11,6 +11,9 @@ public class Item : ScriptableObject
     public TileBase tile;
     public Sprite image;
     public bool stackable = true;
+    public int cost;
+    [TextArea]
+    public string description;
 }
 
 public enum ConsumableType

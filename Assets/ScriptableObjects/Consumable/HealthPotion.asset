@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee1552d241568445a8f8c55762886d77, type: 3}
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
-  name: Mana
   type: 0
   value: 50
   tile: {fileID: 0}
   image: {fileID: -220914807, guid: ea0c139ec37a845e79aecdc17ca9c226, type: 3}
   stackable: 1
+  cost: 50
+  description: Heal yourself completely

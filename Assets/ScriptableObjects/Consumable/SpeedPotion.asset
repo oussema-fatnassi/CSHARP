@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee1552d241568445a8f8c55762886d77, type: 3}
   m_Name: SpeedPotion
   m_EditorClassIdentifier: 
-  name: Speed
   type: 4
   value: 5
   tile: {fileID: 0}
   image: {fileID: -456377621, guid: ea0c139ec37a845e79aecdc17ca9c226, type: 3}
   stackable: 1
+  cost: 50
+  description: Increase your speed to attack before the enemy
