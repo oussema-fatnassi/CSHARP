@@ -8,7 +8,10 @@ public class NPC : MonoBehaviour
 {
     [SerializeField] GameObject dialoguePanel;
     [SerializeField] TMP_Text dialogueText;
+    [SerializeField] TMP_Text npcNameText; 
+    [SerializeField] Image npcImage;
     [SerializeField] string[] dialogue;
+    [SerializeField] Sprite npcSprite;
     private int index;
     public float wordSpeed;
     public bool playerInRange;
@@ -16,10 +19,9 @@ public class NPC : MonoBehaviour
 
     void Update()
     {
-        // Show the dialogue only when the player presses E and is in range
-        if(playerInRange && Input.GetKeyDown(KeyCode.E))
+        if (playerInRange && Input.GetKeyDown(KeyCode.E))
         {
-            if(dialoguePanel.activeInHierarchy)
+            if (dialoguePanel.activeInHierarchy)
             {
                 zeroText();
             }
@@ -27,11 +29,13 @@ public class NPC : MonoBehaviour
             {
                 dialoguePanel.SetActive(true);
                 StartCoroutine(Typing());
+
+                continueButton.GetComponent<Button>().onClick.RemoveAllListeners(); 
+                continueButton.GetComponent<Button>().onClick.AddListener(NextLine); 
             }
         }
 
-        // Enable continue button once the current dialogue line is finished
-        if(dialogueText.text == dialogue[index])
+        if (dialogueText.text == dialogue[index])
         {
             continueButton.SetActive(true);
         }
@@ -40,7 +44,7 @@ public class NPC : MonoBehaviour
     public void NextLine()
     {
         continueButton.SetActive(false);
-        if(index < dialogue.Length - 1)
+        if (index < dialogue.Length - 1)
         {
             index++;
             dialogueText.text = "";
@@ -73,7 +77,9 @@ public class NPC : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            // Don't activate the dialoguePanel here, wait for E key press
+
+            npcNameText.text = gameObject.name; 
+            npcImage.sprite = npcSprite; 
         }
     }
 
