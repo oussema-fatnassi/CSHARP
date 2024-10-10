@@ -11,6 +11,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private TMP_Text itemName;
     [SerializeField] private TMP_Text itemPrice;
     [SerializeField] private TMP_Text itemDescription;
+    [SerializeField] private TMP_Text itemQuantity;
 
     private bool playerInRange = false;
     private Item currentItem; 
@@ -61,5 +62,20 @@ public class ShopManager : MonoBehaviour
     public void CloseShop()
     {
         shopPanel.SetActive(false);
+        itemQuantity.text = "0";
+    }
+
+    public void IncreaseQuantity()
+    {
+        itemQuantity.text = (int.Parse(itemQuantity.text) + 1).ToString();
+    }
+
+    public void DecreaseQuantity()
+    {
+        itemQuantity.text = (int.Parse(itemQuantity.text) - 1).ToString();
+        if (int.Parse(itemQuantity.text) < 1)
+        {
+            itemQuantity.text = "0";
+        }
     }
 }
