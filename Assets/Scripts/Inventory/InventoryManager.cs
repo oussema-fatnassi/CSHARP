@@ -57,47 +57,53 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
         return RectTransformUtility.RectangleContainsScreenPoint(slotRect, mousePosition);
     }
 
-    public bool AddItem(Item item)
+    public bool AddItem(Item item, int quantity)
     {
-        if (IsInventoryFullForItem(item))
+        quantity = TryStackItem(item, quantity);
+
+        while (quantity > 0)
         {
-            Debug.Log($"{item.image.name} is full in the inventory!");
-            return false;
+            int stackCount = Mathf.Min(quantity, maxItemCount);
+            if (AddNewItem(item, stackCount))
+            {
+                quantity -= stackCount; 
+            }
+            else
+            {
+                Debug.Log($"{item.image.name} is full in the inventory!");
+                return false; 
+            }
         }
 
-        if (TryStackItem(item))
-        {
-            ConsolidateInventoryItems();
-            return true;
-        }
-
-        bool added = AddNewItem(item);
-        if (added)
-        {
-            ConsolidateInventoryItems(); 
-        }
-        return added;
+        return true; 
     }
 
-
-    private bool TryStackItem(Item item)
+    private int TryStackItem(Item item, int quantity)
     {
         for (int i = 0; i < inventorySlots.Length; i++)
         {
             InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
 
-            if (itemInSlot != null && itemInSlot.item == item && itemInSlot.count < 5)
+            if (itemInSlot != null && itemInSlot.item == item && itemInSlot.count < maxItemCount)
             {
-                itemInSlot.count++;
+                int spaceAvailable = maxItemCount - itemInSlot.count;
+                int amountToStack = Mathf.Min(quantity, spaceAvailable);
+
+                itemInSlot.count += amountToStack;
                 itemInSlot.RefreshCount();
-                return true;
+                quantity -= amountToStack;
+
+                if (quantity <= 0) 
+                {
+                    return 0;
+                }
             }
         }
-        return false;
+        return quantity;
     }
 
-    private bool AddNewItem(Item item)
+    private bool AddNewItem(Item item, int count)
     {
         for (int i = 0; i < inventorySlots.Length; i++)
         {
@@ -106,23 +112,25 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
 
             if (itemInSlot == null)
             {
-                SpawnNewItem(item, slot);
+                SpawnNewItem(item, slot, count);
                 return true;
             }
         }
         return false;
     }
 
-    void SpawnNewItem(Item item, InventorySlot slot)
+    void SpawnNewItem(Item item, InventorySlot slot, int count)
     {
         GameObject newItem = Instantiate(inventoryItemPrefab, slot.transform);
         InventoryItem inventoryItem = newItem.GetComponent<InventoryItem>();
         inventoryItem.InitializeItem(item);
+        inventoryItem.count = count; 
+        inventoryItem.RefreshCount();
     }
 
-    private bool IsInventoryFullForItem(Item item)
+    private bool IsInventoryFullForItem(Item item, int quantity)
     {
-        int totalItemCount = 0;
+        int totalSpaceAvailable = 0;
 
         for (int i = 0; i < inventorySlots.Length; i++)
         {
@@ -131,14 +139,15 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
 
             if (itemInSlot != null && itemInSlot.item == item)
             {
-                totalItemCount += itemInSlot.count;
-                if (totalItemCount >= maxItemCount)
-                {
-                    return true; 
-                }
+                totalSpaceAvailable += (maxItemCount - itemInSlot.count);
+            }
+            else if (itemInSlot == null)
+            {
+                totalSpaceAvailable += maxItemCount;
             }
         }
-        return false; 
+
+        return totalSpaceAvailable < quantity;
     }
 
     public Item GetSelectedItem(bool use){

@@ -90,7 +90,7 @@ public class ShopManager : MonoBehaviour
 
             for (int i = 0; i < quantity; i++)
             {
-                InventoryManager.instance.AddItem(currentItem); 
+                InventoryManager.instance.AddItem(currentItem, 1); 
             }
             
             CloseShop();
@@ -99,6 +99,7 @@ public class ShopManager : MonoBehaviour
         {
             Debug.Log("Not enough money to buy " + quantity + " of " + currentItem.type);
         }
+        InventoryManager.instance.ConsolidateInventoryItems();
     }
 
 }

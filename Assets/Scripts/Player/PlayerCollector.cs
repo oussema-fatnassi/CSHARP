@@ -45,7 +45,7 @@ public class PlayerCollector : MonoBehaviour, IDataPersistence
             Item collectedItem = GetItemFromTile(tileBase);
             if (collectedItem != null)
             {
-                if (inventoryManager.AddItem(collectedItem))
+                if (inventoryManager.AddItem(collectedItem, 1))
                 {
                     Debug.Log("Item collected. Removing tile at: " + gridPosition);
                     collectableTilemap.SetTile(gridPosition, null); 
