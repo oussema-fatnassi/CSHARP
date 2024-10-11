@@ -45,7 +45,6 @@ public class ShopManager : MonoBehaviour
     {
         shopPanel.SetActive(true);
         FillShop();
-
     }
 
     private void FillShop()
@@ -78,4 +77,28 @@ public class ShopManager : MonoBehaviour
             itemQuantity.text = "0";
         }
     }
+
+    public void BuyItem()
+    {
+        int quantity = int.Parse(itemQuantity.text); 
+        int totalCost = currentItem.cost * quantity; 
+
+        if (CurrencyManager.instance.CanAfford(totalCost))
+        {
+            CurrencyManager.instance.SpendMoney(totalCost); 
+            Debug.Log("Purchased " + quantity + " of " + currentItem.type + " for " + totalCost + " currency.");
+
+            for (int i = 0; i < quantity; i++)
+            {
+                InventoryManager.instance.AddItem(currentItem); 
+            }
+            
+            CloseShop();
+        }
+        else
+        {
+            Debug.Log("Not enough money to buy " + quantity + " of " + currentItem.type);
+        }
+    }
+
 }
