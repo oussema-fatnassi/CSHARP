@@ -10,11 +10,13 @@ public class GameData
     public List<TileData> collectableTiles;
     public List<InventoryItemData> inventoryItems;
     public string playerName;
+    public int totalCurrency;
     public GameData()
     {
         playerPosition = new Vector3(0, 0, 0);
         collectableTiles = new List<TileData>();
         inventoryItems = new List<InventoryItemData>();
         playerName = "";
+        totalCurrency = 1000;
     }
 }

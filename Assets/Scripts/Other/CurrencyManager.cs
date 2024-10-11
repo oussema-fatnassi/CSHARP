@@ -1,11 +1,11 @@
 using UnityEngine;
 using TMPro;
 
-public class CurrencyManager : MonoBehaviour
+public class CurrencyManager : MonoBehaviour, IDataPersistence
 {
     public static CurrencyManager instance;
 
-    [SerializeField] private int totalMoney = 1000; 
+    [SerializeField] private int totalMoney = 0; 
     [SerializeField] private TMP_Text moneyText;    
 
     private void Awake()
@@ -62,5 +62,16 @@ public class CurrencyManager : MonoBehaviour
         {
             moneyText.text =  totalMoney.ToString();
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+        totalMoney = data.totalCurrency;
+        UpdateMoneyUI();
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.totalCurrency = totalMoney;
     }
 }
