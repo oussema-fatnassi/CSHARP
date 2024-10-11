@@ -16,7 +16,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // Left click
+        if (Input.GetMouseButtonDown(0))
         {
             for (int i = 0; i < inventorySlots.Length; i++)
             {
@@ -67,11 +67,18 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
 
         if (TryStackItem(item))
         {
+            ConsolidateInventoryItems();
             return true;
         }
 
-        return AddNewItem(item);
+        bool added = AddNewItem(item);
+        if (added)
+        {
+            ConsolidateInventoryItems(); 
+        }
+        return added;
     }
+
 
     private bool TryStackItem(Item item)
     {
@@ -245,7 +252,6 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
         }
     }
 
-
     public void LoadData(GameData data)
     {
         foreach (var slot in inventorySlots)
@@ -264,7 +270,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
                 continue;
             }
 
-            Item item = Resources.Load<Item>($"ScriptableObjects/Consumable/{itemData.itemName}"); // Adjust the path accordingly
+            Item item = Resources.Load<Item>($"ScriptableObjects/Consumable/{itemData.itemName}"); 
             if (item != null)
             {
                 InventorySlot slot = inventorySlots[itemData.slotIndex];
@@ -278,6 +284,59 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
             else
             {
                 Debug.LogError($"Failed to load item {itemData.itemName} from Resources. Check the path or item existence.");
+            }
+        }
+    }
+
+public void ConsolidateInventoryItems()
+    {
+        Dictionary<string, int> itemCounts = new Dictionary<string, int>();
+
+        foreach (var slot in inventorySlots)
+        {
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null)
+            {
+                string itemName = itemInSlot.item.name;
+                if (!itemCounts.ContainsKey(itemName))
+                {
+                    itemCounts[itemName] = 0;
+                }
+                itemCounts[itemName] += itemInSlot.count;
+                Destroy(itemInSlot.gameObject); 
+            }
+        }
+
+        foreach (var kvp in itemCounts)
+        {
+            string itemName = kvp.Key;
+            int totalItemCount = kvp.Value;
+
+            Item item = Resources.Load<Item>($"ScriptableObjects/Consumable/{itemName}");
+            while (totalItemCount > 0)
+            {
+                int stackCount = Mathf.Min(totalItemCount, maxItemCount);
+                totalItemCount -= stackCount;
+
+                AddItemStack(item, stackCount);
+            }
+        }
+    }
+    private void AddItemStack(Item item, int count)
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            InventorySlot slot = inventorySlots[i];
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+
+            if (itemInSlot == null) 
+            {
+                GameObject newItem = Instantiate(inventoryItemPrefab, slot.transform);
+                InventoryItem inventoryItem = newItem.GetComponent<InventoryItem>();
+                inventoryItem.InitializeItem(item);
+                inventoryItem.count = count;
+                inventoryItem.RefreshCount();
+                break;
             }
         }
     }
