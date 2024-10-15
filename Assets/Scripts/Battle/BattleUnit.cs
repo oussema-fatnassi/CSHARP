@@ -10,14 +10,14 @@ public class BattleUnit : MonoBehaviour
 
     public PlayerStats PlayerStats { get => playerStats; }
 
-    // public void Setup()
-    // {
-    //     hud.SetData(playerStats);
-    //     if (isPlayerUnit)
-    //     {
-    //         // GetComponent<BattlePlayer>().sprite = playerStats.Sprite;
-    //         playerStats.Health = playerStats.MaxHealth;
-    //         playerStats.Mana = playerStats.MaxMana;
-    //     }
-    // }
+    public void Setup()
+    {
+        hud.SetData(playerStats);
+        if (isPlayerUnit)
+        {
+            // GetComponent<BattlePlayer>().sprite = playerStats.Sprite;
+            playerStats.Health = playerStats.MaxHealth;
+            playerStats.Mana = playerStats.MaxMana;
+        }
+    }
 }
