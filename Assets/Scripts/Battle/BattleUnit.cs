@@ -16,8 +16,8 @@ public class BattleUnit : MonoBehaviour
         if (isPlayerUnit)
         {
             // GetComponent<BattlePlayer>().sprite = playerStats.Sprite;
-            playerStats.Health = playerStats.MaxHealth;
-            playerStats.Mana = playerStats.MaxMana;
+            playerStats.health = playerStats.maxHealth;
+            playerStats.mana = playerStats.maxMana;
         }
     }
 }
