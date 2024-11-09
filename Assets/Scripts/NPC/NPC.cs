@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,14 +7,15 @@ public class NPC : MonoBehaviour
 {
     [SerializeField] GameObject dialoguePanel;
     [SerializeField] TMP_Text dialogueText;
-    [SerializeField] TMP_Text npcNameText; 
+    [SerializeField] TMP_Text npcNameText;
     [SerializeField] Image npcImage;
     [SerializeField] string[] dialogue;
     [SerializeField] Sprite npcSprite;
-    private int index;
+    private int index = 0; 
     public float wordSpeed;
     public bool playerInRange;
     public GameObject continueButton;
+    private Coroutine typingCoroutine;
 
     void Update()
     {
@@ -23,22 +23,36 @@ public class NPC : MonoBehaviour
         {
             if (dialoguePanel.activeInHierarchy)
             {
-                zeroText();
+                ResetDialogue();
             }
             else
             {
-                dialoguePanel.SetActive(true);
-                StartCoroutine(Typing());
-
-                continueButton.GetComponent<Button>().onClick.RemoveAllListeners(); 
-                continueButton.GetComponent<Button>().onClick.AddListener(NextLine); 
+                StartDialogue();
             }
         }
 
-        if (dialogueText.text == dialogue[index])
+        if (dialoguePanel.activeInHierarchy && dialogueText.text == dialogue[index])
         {
             continueButton.SetActive(true);
         }
+    }
+
+    private void StartDialogue()
+    {
+        dialoguePanel.SetActive(true);
+        npcNameText.text = gameObject.name;
+        npcImage.sprite = npcSprite;
+        index = 0;
+        
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine); 
+        }
+        dialogueText.text = ""; 
+        typingCoroutine = StartCoroutine(Typing());
+
+        continueButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        continueButton.GetComponent<Button>().onClick.AddListener(NextLine);
     }
 
     public void NextLine()
@@ -48,16 +62,22 @@ public class NPC : MonoBehaviour
         {
             index++;
             dialogueText.text = "";
-            StartCoroutine(Typing());
+
+            if (typingCoroutine != null)
+            {
+                StopCoroutine(typingCoroutine);
+            }
+            typingCoroutine = StartCoroutine(Typing());
         }
         else
         {
-            zeroText();
+            ResetDialogue();
         }
     }
 
     IEnumerator Typing()
     {
+        continueButton.SetActive(false);
         foreach (char letter in dialogue[index].ToCharArray())
         {
             dialogueText.text += letter;
@@ -65,10 +85,16 @@ public class NPC : MonoBehaviour
         }
     }
 
-    public void zeroText()
+    private void ResetDialogue()
     {
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+        }
+        typingCoroutine = null;
         dialogueText.text = "";
         index = 0;
+        continueButton.SetActive(false);
         dialoguePanel.SetActive(false);
     }
 
@@ -77,9 +103,6 @@ public class NPC : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-
-            npcNameText.text = gameObject.name; 
-            npcImage.sprite = npcSprite; 
         }
     }
 
@@ -88,8 +111,7 @@ public class NPC : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            dialoguePanel.SetActive(false);
-            zeroText();
+            ResetDialogue();
         }
     }
 }
