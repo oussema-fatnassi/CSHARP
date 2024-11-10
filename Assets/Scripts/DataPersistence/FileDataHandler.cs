@@ -17,45 +17,41 @@ public class FileDataHandler
     {
         string fullPath = Path.Combine(dataDirPath, dataFileName);
         GameData loadedData = null;
-        if(File.Exists(fullPath))
+        if (File.Exists(fullPath))
         {
             try
             {
-                string dataToLoad = "";
-                using (FileStream stream = new FileStream(fullPath, FileMode.Open))
-                {
-                    using (StreamReader reader = new StreamReader(stream))
-                    {
-                        dataToLoad = reader.ReadToEnd();
-                    }
-                }
+                string dataToLoad = File.ReadAllText(fullPath);
                 loadedData = JsonUtility.FromJson<GameData>(dataToLoad);
+                
+                loadedData.OnAfterDeserialize();
             }
             catch (Exception e)
             {
-                Debug.LogError($"Error loading data from {fullPath}: {e.Message}");
+                Debug.LogError($"Error occurred when trying to load data from file: {fullPath}\n{e}");
             }
         }
         return loadedData;
     }
+
     public void Save(GameData data)
     {
-        string fullPath = Path.Combine(dataDirPath, dataFileName); 
+        string fullPath = Path.Combine(dataDirPath, dataFileName);
         try
         {
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
+
+            data.OnBeforeSerialize();
+
             string dataToStore = JsonUtility.ToJson(data, true);
-            using (FileStream stream = new FileStream(fullPath, FileMode.Create))
-            {
-                using (StreamWriter writer = new StreamWriter(stream))
-                {
-                    writer.Write(dataToStore);
-                }
-            }
+
+            File.WriteAllText(fullPath, dataToStore);
+            
+            Debug.Log($"Data saved to {fullPath}");
         }
         catch (Exception e)
         {
-            Debug.LogError($"Error saving data to {fullPath}: {e.Message}");
+            Debug.LogError($"Error occurred when trying to save data to file: {fullPath}\n{e}");
         }
     }
 }
