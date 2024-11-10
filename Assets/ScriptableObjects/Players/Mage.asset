@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: Mage
   health: 100
+  maxHealth: 100
   mana: 29
+  maxMana: 100
   damage: 35
   defense: 31
   speed: 44

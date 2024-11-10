@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: Dwarf
   health: 100
+  maxHealth: 100
   mana: 43
+  maxMana: 100
   damage: 36
   defense: 33
   speed: 28

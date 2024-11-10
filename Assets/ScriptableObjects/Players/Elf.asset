@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: Elf
   health: 100
+  maxHealth: 100
   mana: 28
+  maxMana: 100
   damage: 40
   defense: 33
   speed: 32

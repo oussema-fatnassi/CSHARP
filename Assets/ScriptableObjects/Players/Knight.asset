@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: Knight
   health: 100
+  maxHealth: 100
   mana: 34
+  maxMana: 100
   damage: 35
   defense: 49
   speed: 24
