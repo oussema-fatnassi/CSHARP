@@ -10,24 +10,16 @@ public class BattleHud : MonoBehaviour
     [SerializeField] Text levelText;
     [SerializeField] HPBar hpBar;
     [SerializeField] ManaBar manaBar;
+    // [SerializeField] BattleDialogBox dialogBox;
 
-    public void SetData(Player player)
+    public void SetData(PlayerStats player)
     {
-        nameText.text = player.PlayerName;
-        levelText.text = "Lvl " + player.Level;
-        hpBar.SetHealth((float)player.Health / player.MaxHealth);
-        manaBar.SetMana((float)player.Mana / player.MaxMana);
+        nameText.text = player.playerName;
+        levelText.text = "Lvl " + player.level;
+        hpBar.SetHealth((float)player.health / player.maxHealth);
+        manaBar.SetMana((float)player.mana / player.maxMana);
+
+        // dialogBox.SetDialog(player.PlayerName + " is ready for battle!");
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

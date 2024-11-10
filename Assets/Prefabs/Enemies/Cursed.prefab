@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4093519916075267754}
   - component: {fileID: 3214758790130062961}
   - component: {fileID: 909233647673629296}
+  - component: {fileID: 8734181850258060460}
   - component: {fileID: 3441476504899004658}
   - component: {fileID: 8475733273715942934}
   m_Layer: 0
@@ -171,11 +172,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  dialoguePanel: {fileID: 0}
-  dialogueText: {fileID: 0}
-  dialogue:
-  - ENEMY ENCOUNTERED
-  wordSpeed: 5
+--- !u!114 &8734181850258060460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5019713119135076377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6ec9cd1cde805a4db792c260ee43a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &3441476504899004658
 Rigidbody2D:
   serializedVersion: 4
