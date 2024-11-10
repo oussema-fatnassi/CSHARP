@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -6,11 +5,16 @@ using System.Linq;
 public class DataPersistenceManager : MonoBehaviour
 {
     [Header("File Storage Configuration")]
-    [SerializeField] private string fileName;
+    [SerializeField] private string defaultFileName = "defaultSave";
     [SerializeField] private PlayerStats[] allPlayerStats;
+
     private GameData gameData;
     private List<IDataPersistence> dataPersistenceObjects;
     private FileDataHandler dataHandler;
+
+    // Track the currently loaded save file
+    private string currentSaveFileName;
+
     public static DataPersistenceManager instance { get; private set; }
 
     private void Awake()
@@ -32,9 +36,9 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void Start()
     {
-        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        this.dataHandler = new FileDataHandler(Application.persistentDataPath, defaultFileName);
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
-        
+
         if (allPlayerStats != null)
         {
             foreach (var playerStats in allPlayerStats)
@@ -50,80 +54,83 @@ public class DataPersistenceManager : MonoBehaviour
             Debug.LogError("No PlayerStats assigned to DataPersistenceManager!");
         }
 
-        LoadGame();
+        // Load the default save file when starting the game
+        // LoadGame(defaultFileName);
     }
 
-    public void NewGame()
+    // Create a new game with a specific save file name
+    public void NewGame(string saveName)
     {
         this.gameData = new GameData();
-        
-        if (allPlayerStats != null)
+        this.currentSaveFileName = saveName;
+
+        foreach (var playerStats in allPlayerStats)
         {
-            foreach (var playerStats in allPlayerStats)
+            if (playerStats != null)
             {
-                if (playerStats != null)
-                {
-                    playerStats.ResetToInitialValues();
-                    playerStats.SaveData(ref gameData);
-                    Debug.Log($"Initialized stats for player: {playerStats.playerName}");
-                }
+                playerStats.ResetToInitialValues();
+                playerStats.SaveData(ref gameData);
+                Debug.Log($"Initialized stats for player: {playerStats.playerName}");
             }
         }
 
-        SaveGame();
+        SaveGame(currentSaveFileName);
     }
 
-    public void LoadGame()
+    // Save the game to a specific file name if provided, or use the current file
+public void SaveGame(string saveName = null)
+{
+    if (this.gameData == null)
     {
-        this.gameData = dataHandler.Load();
-        
-        if (this.gameData == null)
-        {
-            Debug.Log("No save data found. Starting new game.");
-            NewGame();
-        }
-        else
-        {
-            Debug.Log("Loading game data...");
-            foreach (IDataPersistence dataPersistenceObject in dataPersistenceObjects)
-            {
-                dataPersistenceObject.LoadData(gameData);
-            }
-        }
+        Debug.LogWarning("No game data found. Start a New Game first.");
+        return;
     }
 
-    public void SaveGame()
+    foreach (IDataPersistence dataPersistenceObject in dataPersistenceObjects)
     {
-        if (this.gameData == null)
-        {
-            Debug.LogWarning("No game data was found. A New Game needs to be started before data can be saved.");
-            return;
-        }
+        dataPersistenceObject.SaveData(ref gameData);
+        Debug.Log($"Saving data for object: {dataPersistenceObject}");
+    }
 
+    string saveFileName = saveName ?? currentSaveFileName ?? defaultFileName;
+    dataHandler.Save(gameData, saveFileName);
+    Debug.Log($"Game data saved to {saveFileName} with data: {JsonUtility.ToJson(gameData)}");
+}
+
+public void LoadGame(string saveName = null)
+{
+    this.currentSaveFileName = saveName ?? defaultFileName;
+    this.gameData = dataHandler.Load(currentSaveFileName);
+
+    if (this.gameData == null)
+    {
+        Debug.Log("No save data found. Starting new game.");
+        NewGame(currentSaveFileName);
+    }
+    else
+    {
+        Debug.Log($"Loading game data from {currentSaveFileName} with data: {JsonUtility.ToJson(gameData)}");
         foreach (IDataPersistence dataPersistenceObject in dataPersistenceObjects)
         {
-            dataPersistenceObject.SaveData(ref gameData);
+            dataPersistenceObject.LoadData(gameData);
+            Debug.Log($"Loaded data for object: {dataPersistenceObject}");
         }
+    }
+}
 
-        foreach (var entry in gameData.playerStats)
-        {
-            Debug.Log($"Saved stats for player: {entry.Key}");
-            Debug.Log($"Health: {entry.Value.health}, MaxHealth: {entry.Value.maxHealth}");
-            Debug.Log($"Level: {entry.Value.level}, Experience: {entry.Value.experience}");
-        }
 
-        dataHandler.Save(gameData);
-        Debug.Log("Game data saved successfully!");
+    public string[] GetAllSaveFiles()
+    {
+        return dataHandler.GetAllSaveFiles();
     }
 
     private void OnApplicationQuit()
     {
-        SaveGame();
+        SaveGame(); // Save using the current save file name
     }
 
     private List<IDataPersistence> FindAllDataPersistenceObjects()
     {
-        IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistence>();
-        return new List<IDataPersistence>(dataPersistenceObjects);
+        return FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistence>().ToList();
     }
 }
