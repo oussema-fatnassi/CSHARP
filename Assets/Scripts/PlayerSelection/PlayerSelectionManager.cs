@@ -6,10 +6,10 @@ using Cinemachine;
 public class PlayerSelectionManager : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private List<GameObject> playerIconPrefabs; 
-    [SerializeField] private List<GameObject> playerPrefabs;     
+    [SerializeField] public List<GameObject> playerPrefabs;     
     [SerializeField] private List<TMP_Text> playerStatsText;
     [SerializeField] private PlayerSlot[] playerSlots;
-    [SerializeField] private List<PlayerStats> playerStatsList; 
+    [SerializeField] public List<PlayerStats> playerStatsList; 
     [SerializeField] private CinemachineVirtualCameraBase playerCamera;
     private Player selectedPlayer;  
     private GameObject selectedPlayerPrefab;
@@ -35,7 +35,7 @@ public class PlayerSelectionManager : MonoBehaviour, IDataPersistence
         SetupPlayerSlots();
     }
 
-    private void InitializePlayerClassMap()
+    public void InitializePlayerClassMap()
     {
         playerClassMap = new Dictionary<string, System.Type>
         {

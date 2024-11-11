@@ -7,9 +7,9 @@ using System.Collections.Generic;
 public class MainMenuManager : MonoBehaviour
 {
     [Header("UI References")]
-    [SerializeField] private GameObject mainMenuPanel;
-    [SerializeField] private GameObject newGamePanel;
-    [SerializeField] private GameObject loadGamePanel;
+    [SerializeField] public GameObject mainMenuPanel;
+    [SerializeField] public GameObject newGamePanel;
+    [SerializeField] public GameObject loadGamePanel;
     
     [Header("Main Menu Buttons")]
     [SerializeField] private Button newGameButton;
@@ -23,9 +23,9 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Button newGameBackButton;
 
     [Header("Load Game")]
-    [SerializeField] private Transform saveFileContainer;
-    [SerializeField] private GameObject saveFileButtonPrefab;
-    [SerializeField] private TextMeshProUGUI noSavesText;
+    [SerializeField] public Transform saveFileContainer;
+    [SerializeField] public GameObject saveFileButtonPrefab;
+    [SerializeField] public TextMeshProUGUI noSavesText;
     [SerializeField] private Button loadGameBackButton;
     
     [Header("Scene Management")]
