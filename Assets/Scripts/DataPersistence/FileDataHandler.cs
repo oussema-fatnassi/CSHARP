@@ -38,23 +38,31 @@ public class FileDataHandler
 
     // Save to a specific file name
     public void Save(GameData data, string fileName = null)
-    {
-        string targetFileName = fileName ?? defaultFileName;
-        string fullPath = Path.Combine(dataDirPath, targetFileName + ".json");
+{
+    string targetFileName = fileName ?? defaultFileName;
+    string fullPath = Path.Combine(dataDirPath, targetFileName + ".json");
 
-        try
-        {
-            Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
-            data.OnBeforeSerialize();
-            string dataToStore = JsonUtility.ToJson(data, true);
-            File.WriteAllText(fullPath, dataToStore);
-            Debug.Log($"Data saved to {fullPath}");
-        }
-        catch (Exception e)
-        {
-            Debug.LogError($"Error saving data to file {fullPath}:\n{e}");
-        }
+    try
+    {
+        // Log the exact path being used
+        Debug.Log($"Attempting to save to path: {fullPath}");
+        Debug.Log($"Directory exists: {Directory.Exists(Path.GetDirectoryName(fullPath))}");
+        
+        Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
+        data.OnBeforeSerialize();
+        string dataToStore = JsonUtility.ToJson(data, true);
+        
+        // Log the data being saved
+        Debug.Log($"Data being saved: {dataToStore}");
+        
+        File.WriteAllText(fullPath, dataToStore);
+        Debug.Log($"Data successfully saved to {fullPath}");
     }
+    catch (Exception e)
+    {
+        Debug.LogError($"Error saving data to file {fullPath}:\n{e}");
+    }
+}
 
     // Get all available save files
     public string[] GetAllSaveFiles()
