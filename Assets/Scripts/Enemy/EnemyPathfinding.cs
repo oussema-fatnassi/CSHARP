@@ -3,20 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/*
+    This script is attached to the Enemy prefab.
+    It is used to move the enemy towards the player.
+    It also handles collision with the MonsterBlock layer to stop the enemy's movement.
+*/
+
 public class EnemyPathfinding : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 2f;
     private Rigidbody2D rb;
     private Vector2 moveDir;
 
+    // Awake is called when the script instance is being loaded
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
     }
 
+    // FixedUpdate is called every fixed framerate frame
     private void FixedUpdate() {
         rb.MovePosition(rb.position + moveDir * (moveSpeed * Time.fixedDeltaTime));
     }
 
+    // Move the monster towards the target position
     public void MoveTo(Vector2 targetPosition) {
         moveDir = targetPosition;
     }
@@ -24,19 +33,15 @@ public class EnemyPathfinding : MonoBehaviour
     // Handle collision with the MonsterBlock layer
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.layer == LayerMask.NameToLayer("MonsterBlock")) {
-            // The monster collided with an invisible enclosure
-            // Here, we stop the monster's movement or make it turn around
             StopMovingOrChangeDirection();
         }
     }
 
-    // Stop the movement or change the direction of the monster
+    // Stop the monster or change its direction
     private void StopMovingOrChangeDirection() {
-        // To stop the monster, set the move direction to zero
         moveDir = Vector2.zero;
 
-        // Alternatively, to change direction, generate a new roam position:
-        Vector2 newDirection = -moveDir; // Reverse the current direction to go back the way it came from
-        MoveTo(newDirection); // Change direction to roam somewhere else
+        Vector2 newDirection = -moveDir;
+        MoveTo(newDirection);
     }
 }
