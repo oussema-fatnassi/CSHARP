@@ -7,6 +7,7 @@ TagManager:
   - NPC
   - PlayerContainer
   - BattlePlayer
+  - Enemy
   layers:
   - Default
   - TransparentFX
