@@ -11,12 +11,28 @@ using UnityEngine;
 public class EnemyEncounter : MonoBehaviour
 {
     [SerializeField] GameObject BattleSystemObject;
+    [SerializeField] GameObject InventoryButton;
+    [SerializeField] GameObject PlayerStatsButton;
+    [SerializeField] GameObject Money;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             Debug.Log("Player in range, autodesctructing in 3 2 1...");
-            StartCoroutine(DelayAndDeactivate(3f));
+            StartCoroutine(DelayAndDeactivate(2f));
+            BattleSystemObject.SetActive(true);
+            InventoryButton.SetActive(false);
+            PlayerStatsButton.SetActive(false);
+            Money.SetActive(false);
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                EnemyPathfinding enemyPathfinding = enemy.GetComponent<EnemyPathfinding>();
+                if (enemyPathfinding != null)
+                {
+                    enemyPathfinding.enabled = false;
+                }
+            }
         }
     }
 
