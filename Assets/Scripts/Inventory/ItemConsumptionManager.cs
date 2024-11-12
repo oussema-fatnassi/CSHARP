@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+    This class is responsible for managing the consumption of items by the player.
+    It applies the effects of the items to the player's stats.
+*/
+
 public class ItemConsumptionManager : MonoBehaviour
 {
     public static ItemConsumptionManager instance;
@@ -17,7 +22,7 @@ public class ItemConsumptionManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    // Consumes the item and applies its effects to the player
     public void ConsumeItem(Player player, Item item)
     {
         if (player == null || item == null)

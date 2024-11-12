@@ -2,13 +2,17 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/*
+    This class is responsible for managing the player slots in the player selection screen.
+    It handles the selection of the player slots and displays the player stats when double-clicked.
+*/
 public class PlayerSlot : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private RectTransform iconArea; 
     private GameObject instantiatedPrefab;
     private Player player;  
     public Image image;
-    private int playerIndex;  // Store the index of the player
+    private int playerIndex;  
 
     public string SlotName => gameObject.name;
 
@@ -22,17 +26,16 @@ public class PlayerSlot : MonoBehaviour, IPointerClickHandler
 
         instantiatedPrefab = playerPrefab;
         player = playerData;  
-        playerIndex = index;  // Store the player index for later use
+        playerIndex = index;  
     }
 
     // Called when this slot is clicked
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.clickCount == 2)  // Check for double-click
+        if (eventData.clickCount == 2)  
         {
             if (player != null)
             {
-                // Pass the player and its index to the selection manager
                 PlayerSelectionManager.Instance.ShowPlayerStats(player, playerIndex);
             }
             else

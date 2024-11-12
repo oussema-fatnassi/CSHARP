@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+/*
+    This class is responsible for storing the data of the inventory items.
+    It is used by the GameData class to serialize and deserialize the inventory items.
+*/
+
 [CreateAssetMenu(fileName = "New Consumable Item", menuName = "Inventory/Consumable Item")]
 public class Item : ScriptableObject
 {

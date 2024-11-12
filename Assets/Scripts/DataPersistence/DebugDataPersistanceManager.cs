@@ -2,6 +2,11 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 
+/*
+    This class is responsable for the debug of the data persistence of the game.
+    Used to find the bugs in the data persistence of the game.
+*/
+
 public class DebugDataPersistence : MonoBehaviour
 {
     private void OnEnable()
@@ -18,7 +23,7 @@ public class DebugDataPersistence : MonoBehaviour
     {
         StartCoroutine(DebugPersistenceObjects());
     }
-
+    // Debug the data persistence objects in the scene
     private System.Collections.IEnumerator DebugPersistenceObjects()
     {
         yield return null;
@@ -37,7 +42,7 @@ public class DebugDataPersistence : MonoBehaviour
             Debug.Log($"- {obj.GetType().Name} on GameObject: {((MonoBehaviour)obj).gameObject.name}");
         }
     }
-
+    // Log the game data to the console
     public static void LogGameData(GameData gameData, string context)
     {
         if (gameData == null)

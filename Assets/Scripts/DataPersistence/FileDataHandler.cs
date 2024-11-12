@@ -2,11 +2,16 @@ using System;
 using System.IO;
 using UnityEngine;
 
+/* 
+    This class is responsible for handling the loading and saving of game data to and from files.
+    It is used by the DataPersistenceManager class to save and load the game data.
+ */
+
 public class FileDataHandler 
 {
     private string dataDirPath;
     private string defaultFileName;
-
+    // Constructor for the FileDataHandler class
     public FileDataHandler(string dataDirPath, string defaultFileName)
     {
         this.dataDirPath = dataDirPath;
@@ -38,31 +43,29 @@ public class FileDataHandler
 
     // Save to a specific file name
     public void Save(GameData data, string fileName = null)
-{
-    string targetFileName = fileName ?? defaultFileName;
-    string fullPath = Path.Combine(dataDirPath, targetFileName + ".json");
+    {
+        string targetFileName = fileName ?? defaultFileName;
+        string fullPath = Path.Combine(dataDirPath, targetFileName + ".json");
 
-    try
-    {
-        // Log the exact path being used
-        Debug.Log($"Attempting to save to path: {fullPath}");
-        Debug.Log($"Directory exists: {Directory.Exists(Path.GetDirectoryName(fullPath))}");
-        
-        Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
-        data.OnBeforeSerialize();
-        string dataToStore = JsonUtility.ToJson(data, true);
-        
-        // Log the data being saved
-        Debug.Log($"Data being saved: {dataToStore}");
-        
-        File.WriteAllText(fullPath, dataToStore);
-        Debug.Log($"Data successfully saved to {fullPath}");
+        try
+        {
+            Debug.Log($"Attempting to save to path: {fullPath}");
+            Debug.Log($"Directory exists: {Directory.Exists(Path.GetDirectoryName(fullPath))}");
+            
+            Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
+            data.OnBeforeSerialize();
+            string dataToStore = JsonUtility.ToJson(data, true);
+            
+            Debug.Log($"Data being saved: {dataToStore}");
+            
+            File.WriteAllText(fullPath, dataToStore);
+            Debug.Log($"Data successfully saved to {fullPath}");
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Error saving data to file {fullPath}:\n{e}");
+        }
     }
-    catch (Exception e)
-    {
-        Debug.LogError($"Error saving data to file {fullPath}:\n{e}");
-    }
-}
 
     // Get all available save files
     public string[] GetAllSaveFiles()
@@ -73,7 +76,6 @@ public class FileDataHandler
         }
         string[] files = Directory.GetFiles(dataDirPath, "*.json");
         
-        // Remove file extensions for display purposes
         for (int i = 0; i < files.Length; i++)
         {
             files[i] = Path.GetFileNameWithoutExtension(files[i]);

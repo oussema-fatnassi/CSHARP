@@ -3,13 +3,17 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
+/*
+    This class is responsible for testing the PlayerController class in play mode.
+    It tests the movement and animation of the player character.
+*/
+
 public class PlayerControllerPlayModeTest
 {
     private GameObject playerObject;
     private PlayerController playerController;
     private Animator animator;
-
-    // Setup: Runs before every test
+    // Set up the test environment by creating a new PlayerController object and adding a BoxCollider2D and Animator component to it.
     [SetUp]
     public void Setup()
     {
@@ -23,13 +27,13 @@ public class PlayerControllerPlayModeTest
         var runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Dragon");
         animator.runtimeAnimatorController = runtimeAnimatorController;
     }
-
+    // Tear down the test environment by destroying the PlayerController object.
     [TearDown]
     public void Teardown()
     {
         Object.Destroy(playerObject);
     }
-
+    // Test the player character moves to the right on input.
     [UnityTest]
     public IEnumerator PlayerMovesRightOnInput()
     {
@@ -42,7 +46,7 @@ public class PlayerControllerPlayModeTest
 
         Assert.Greater(playerObject.transform.position.x, initialPosition.x, "Player did not move to the right.");
     }
-
+    // Test the player character moves to the left on input.
     [UnityTest]
     public IEnumerator PlayerStartsWalkingAnimationOnInput()
     {
@@ -53,7 +57,7 @@ public class PlayerControllerPlayModeTest
 
         Assert.IsTrue(animator.GetBool("isWalking"), "Player is not walking despite movement input.");
     }
-
+    // Test the player character stops moving on no input.
     [UnityTest]
     public IEnumerator PlayerStopsWalkingAnimationOnNoInput()
     {

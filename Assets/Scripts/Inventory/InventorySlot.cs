@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/*
+    This class is responsible for managing the inventory slots in the game.
+    It handles the selection and deselection of the inventory slots.
+*/
+
 public class InventorySlot : MonoBehaviour, IDropHandler
 {
     public Image image;
