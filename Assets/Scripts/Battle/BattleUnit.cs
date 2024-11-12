@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+    This class is responsible for setting up the battle unit.
+*/
+
 public class BattleUnit : MonoBehaviour
 {
     [SerializeField] PlayerStats playerStats;
@@ -10,6 +14,7 @@ public class BattleUnit : MonoBehaviour
 
     public PlayerStats PlayerStats { get => playerStats; }
 
+    // Set the player stats
     public void Setup()
     {
         hud.SetData(playerStats);
