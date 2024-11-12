@@ -1,6 +1,11 @@
 using UnityEngine;
 using Cinemachine;
 
+/*
+    This class is responsible for managing the camera in the game.
+    It handles setting the camera bounds and orthographic size.
+*/
+
 public class CameraManager : MonoBehaviour
 {
     public static CameraManager Instance;
@@ -16,7 +21,7 @@ public class CameraManager : MonoBehaviour
         }
         confiner = virtualCamera.GetComponent<CinemachineConfiner>();
     }
-
+    // Set the camera bounds for the virtual camera
     public void SetCameraBounds(Collider2D bounds)
     {
         if (confiner != null)
@@ -25,7 +30,7 @@ public class CameraManager : MonoBehaviour
             confiner.InvalidatePathCache(); 
         }
     }
-
+    // Set the orthographic size of the virtual camera
     public void SetOrthoSize(int size)
     {
         virtualCamera.m_Lens.OrthographicSize = size;

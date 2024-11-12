@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+    This class is responsible for warping the player to a different location in the game.
+    It also changes the camera bounds and orthographic size when the player warps.
+*/
+
 public class Warp : MonoBehaviour
 {
     [SerializeField] private Transform destination;

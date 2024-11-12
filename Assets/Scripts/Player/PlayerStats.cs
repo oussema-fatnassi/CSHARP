@@ -1,5 +1,10 @@
 using UnityEngine;
 
+/*
+    This class is responsible for storing the data of the player stats.
+    It is used by the GameData class to serialize and deserialize the player stats.
+*/
+
 [CreateAssetMenu(fileName = "NewPlayerStats", menuName = "Player Stats")]
 public class PlayerStats : ScriptableObject, IDataPersistence
 {
@@ -25,7 +30,7 @@ public class PlayerStats : ScriptableObject, IDataPersistence
     private int initialPrecision;
     private int initialExperience;
     private int initialLevel;
-
+    // Method to cache the initial values of the player stats
     public void CacheInitialValues()
     {
         initialHealth = health;
@@ -38,7 +43,7 @@ public class PlayerStats : ScriptableObject, IDataPersistence
         initialExperience = experience;
         initialLevel = level;
     }
-
+    // Method to reset the player stats to their initial values
     public void ResetToInitialValues()
     {
         health = initialHealth;
@@ -51,7 +56,7 @@ public class PlayerStats : ScriptableObject, IDataPersistence
         experience = initialExperience;
         level = initialLevel;
     }
-
+    // Method to load the player stats from the saved data
     public void LoadData(GameData data)
     {
         if (data.playerStats.TryGetValue(playerName, out PlayerStatsData savedStats))
@@ -73,7 +78,7 @@ public class PlayerStats : ScriptableObject, IDataPersistence
             Debug.LogWarning($"No saved stats found for player: {playerName}");
         }
     }
-
+    // Method to save the player stats to the game data
     public void SaveData(ref GameData data)
     {
         if (!data.playerStats.ContainsKey(playerName))

@@ -3,6 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+    This class is responsible for managing the player's inventory.
+    It provides methods to add items to the inventory, use items, and save and load the inventory data.
+*/
+
 public class InventoryManager : MonoBehaviour, IDataPersistence
 {
     public static InventoryManager instance;
@@ -13,7 +18,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
 
     private float lastClickTime = 0f;
     private const float doubleClickThreshold = 0.3f;
-
+    // We update the inventory manager to handle double-clicking on the inventory slots to select them.
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -32,6 +37,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
             }
         }
     }
+    // Method to change the selected slot based on the slot index.
     void ChangeSelectedSlot(int newValue)
     {
         if (selectedSlot >= 0 && selectedSlot < inventorySlots.Length)
@@ -44,19 +50,18 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
             inventorySlots[selectedSlot].Select();
         }
     }
-
     private void Awake()
     {
         instance = this;
     }
-
+    // Method to check if the slot is clicked.
     bool IsSlotClicked(InventorySlot slot)
     {
         RectTransform slotRect = slot.GetComponent<RectTransform>();
         Vector2 mousePosition = Input.mousePosition;
         return RectTransformUtility.RectangleContainsScreenPoint(slotRect, mousePosition);
     }
-
+    // Method to add an item to the inventory.
     public bool AddItem(Item item, int quantity)
     {
         quantity = TryStackItem(item, quantity);
@@ -77,7 +82,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
 
         return true; 
     }
-
+    // Method to stack items in the inventory if possible.
     private int TryStackItem(Item item, int quantity)
     {
         for (int i = 0; i < inventorySlots.Length; i++)
@@ -102,7 +107,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
         }
         return quantity;
     }
-
+    // Method to add a new item to the inventory.
     private bool AddNewItem(Item item, int count)
     {
         for (int i = 0; i < inventorySlots.Length; i++)
@@ -118,7 +123,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
         }
         return false;
     }
-
+    //
     void SpawnNewItem(Item item, InventorySlot slot, int count)
     {
         GameObject newItem = Instantiate(inventoryItemPrefab, slot.transform);
@@ -127,7 +132,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
         inventoryItem.count = count; 
         inventoryItem.RefreshCount();
     }
-
+    // Method to check if the inventory is full for the given item.
     private bool IsInventoryFullForItem(Item item, int quantity)
     {
         int totalSpaceAvailable = 0;
@@ -149,7 +154,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
 
         return totalSpaceAvailable < quantity;
     }
-
+    // Method to get the selected item from the inventory.
     public Item GetSelectedItem(bool use){
         InventorySlot slot = inventorySlots[selectedSlot];
         InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
@@ -167,7 +172,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
         }
         return null;
     }
-
+    // Method to use the selected item from the inventory.
     public void UseSelectedItem()
     {
         GameObject playerObject = GameObject.FindWithTag("Player");
@@ -196,7 +201,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
             Debug.LogError("No player found in the scene.");
         }
     }
-
+    // Method to deactivate the player movement.
     public void DeactivateMovement()
     {
         GameObject playerObject = GameObject.FindWithTag("Player");
@@ -220,7 +225,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
             Debug.LogError("No player found in the scene.");
         }
     }
-
+    // Method to activate the player movement.
     public void ActivateMovement()
     {
         GameObject playerObject = GameObject.FindWithTag("Player");
@@ -244,7 +249,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
             Debug.LogError("No player found in the scene.");
         }
     }
-
+    // Method to save the inventory data.
     public void SaveData(ref GameData data)
     {
         data.inventoryItems.Clear(); 
@@ -260,7 +265,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
             }
         }
     }
-
+    // Method to load the inventory data.
     public void LoadData(GameData data)
     {
         foreach (var slot in inventorySlots)
@@ -296,8 +301,8 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
             }
         }
     }
-
-public void ConsolidateInventoryItems()
+    // Method to consolidate the inventory items.
+    public void ConsolidateInventoryItems()
     {
         Dictionary<string, int> itemCounts = new Dictionary<string, int>();
 
@@ -331,6 +336,7 @@ public void ConsolidateInventoryItems()
             }
         }
     }
+    // Method to add an item stack to the inventory.
     private void AddItemStack(Item item, int count)
     {
         for (int i = 0; i < inventorySlots.Length; i++)

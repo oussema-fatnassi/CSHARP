@@ -4,6 +4,11 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+/*
+    This class is responsible for managing the shop in the game.
+    It handles the opening and closing of the shop, as well as the buying of items.
+*/
+
 public class ShopManager : MonoBehaviour
 {
     [SerializeField] private GameObject shopPanel;
@@ -15,7 +20,7 @@ public class ShopManager : MonoBehaviour
 
     private bool playerInRange = false;
     private Item currentItem; 
-
+    // Open the shop panel if the player is in range
     void Update()
     {
         if (playerInRange && Input.GetKeyDown(KeyCode.E))
@@ -30,23 +35,23 @@ public class ShopManager : MonoBehaviour
             CloseShop();
         }
     }
-
+    // Set the player in range status
     public void SetPlayerInRange(bool inRange)
     {
         playerInRange = inRange;
     }
-
+    // Set the current item in the shop
     public void SetCurrentItem(Item item)
     {
         currentItem = item;
     }
-
+    // Open the shop panel
     public void OpenShop()
     {
         shopPanel.SetActive(true);
         FillShop();
     }
-
+    // Fill the shop panel with the current item details
     private void FillShop()
     {
         if (currentItem != null)
@@ -57,18 +62,18 @@ public class ShopManager : MonoBehaviour
             itemImage.sprite = currentItem.image;
         }
     }
-
+    // Close the shop panel
     public void CloseShop()
     {
         shopPanel.SetActive(false);
         itemQuantity.text = "0";
     }
-
+    // Increase the quantity of the item
     public void IncreaseQuantity()
     {
         itemQuantity.text = (int.Parse(itemQuantity.text) + 1).ToString();
     }
-
+    // Decrease the quantity of the item
     public void DecreaseQuantity()
     {
         itemQuantity.text = (int.Parse(itemQuantity.text) - 1).ToString();
@@ -77,7 +82,7 @@ public class ShopManager : MonoBehaviour
             itemQuantity.text = "0";
         }
     }
-
+    // Buy the item from the shop
     public void BuyItem()
     {
         int quantity = int.Parse(itemQuantity.text); 

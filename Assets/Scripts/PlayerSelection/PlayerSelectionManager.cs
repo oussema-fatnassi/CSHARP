@@ -3,6 +3,11 @@ using UnityEngine;
 using TMPro;
 using Cinemachine;
 
+/*
+    This class is responsible for managing the player selection in the game.
+    It handles the selection of the player, showing the player stats, and spawning the player in the game world.
+*/
+
 public class PlayerSelectionManager : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private List<GameObject> playerIconPrefabs; 
@@ -34,7 +39,7 @@ public class PlayerSelectionManager : MonoBehaviour, IDataPersistence
         InitializePlayerClassMap();
         SetupPlayerSlots();
     }
-
+    // Initialize the player class map with the available player classes
     public void InitializePlayerClassMap()
     {
         playerClassMap = new Dictionary<string, System.Type>
@@ -46,7 +51,7 @@ public class PlayerSelectionManager : MonoBehaviour, IDataPersistence
             { "Mage", typeof(Mage) }
         };
     }
-
+    // Initialize the player stats text map with the available player stats
     private void InitializeStatsTextMap(PlayerStats stats)
     {
         statsTextMap = new Dictionary<TMP_Text, System.Func<PlayerStats, string>>();
@@ -74,7 +79,7 @@ public class PlayerSelectionManager : MonoBehaviour, IDataPersistence
             }
         }
     }
-
+    // Setup the player slots with the player icons and stats
     private void SetupPlayerSlots()
     {
         for (int i = 0; i < playerSlots.Length; i++)
@@ -98,7 +103,7 @@ public class PlayerSelectionManager : MonoBehaviour, IDataPersistence
             }
         }
     }
-
+    // Create the player icon for the specified index
     private GameObject CreatePlayerIcon(int index)
     {
         GameObject playerIcon = Instantiate(playerIconPrefabs[index], playerSlots[index].transform);
@@ -111,7 +116,7 @@ public class PlayerSelectionManager : MonoBehaviour, IDataPersistence
 
         return playerIcon;
     }
-
+    // Add the player component to the player icon
     private Player AddPlayerComponent(GameObject playerIcon, string slotName)
     {
         foreach (var entry in playerClassMap)
@@ -123,7 +128,7 @@ public class PlayerSelectionManager : MonoBehaviour, IDataPersistence
         }
         return null;
     }
-
+    // Find the player stats for the specified player name
     private PlayerStats FindPlayerStats(string playerName)
     {
         foreach (PlayerStats stats in playerStatsList)
@@ -136,7 +141,7 @@ public class PlayerSelectionManager : MonoBehaviour, IDataPersistence
         LogError($"No PlayerStats found for {playerName}");
         return null;
     }
-
+    // Show the player stats for the specified player and player index
     public void ShowPlayerStats(Player player, int playerIndex)
     {
         if (player == null || playerIndex < 0 || playerIndex >= playerPrefabs.Count)
@@ -170,7 +175,7 @@ public class PlayerSelectionManager : MonoBehaviour, IDataPersistence
 
         Debug.Log($"Selected player is now: {selectedPlayer.PlayerName}");
     }
-
+    // Spawn the player in the game world
     public void SpawnPlayer()
     {
         if (selectedPlayer == null)
@@ -191,7 +196,7 @@ public class PlayerSelectionManager : MonoBehaviour, IDataPersistence
             LogError("No GameObject with tag 'Player' found!");
         }
     }
-
+    // Spawn the player at the specified spawn point
     private void SpawnAtPoint(GameObject spawnPoint)
     {
         Vector3 spawnPosition = spawnPoint.transform.position;
@@ -221,7 +226,7 @@ public class PlayerSelectionManager : MonoBehaviour, IDataPersistence
     {
         Debug.LogError(message);
     }
-
+    // Save the player data to the game data
     public void SaveData(ref GameData data)
     {
         string name = GameObject.FindWithTag("PlayerContainer").transform.GetChild(0).name;
@@ -229,7 +234,7 @@ public class PlayerSelectionManager : MonoBehaviour, IDataPersistence
         data.playerName = name;
         data.playerPosition = GameObject.FindWithTag("PlayerContainer").transform.GetChild(0).position;
     }
-
+    // Load the player data from the game data
     public void LoadData(GameData data)
     {
         GameObject prefabToInstantiate = playerPrefabs.Find(prefab => prefab.name == data.playerName);

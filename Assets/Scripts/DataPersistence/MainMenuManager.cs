@@ -4,6 +4,11 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections.Generic;
 
+/*
+    This class is responsible for managing the main menu of the game.
+    It handles the creation of new games, loading of saved games, and quitting the game.
+*/
+
 public class MainMenuManager : MonoBehaviour
 {
     [Header("UI References")]
@@ -38,7 +43,7 @@ public class MainMenuManager : MonoBehaviour
         Debug.Log($"New Game Panel null? {newGamePanel == null}");
         Debug.Log($"Load Game Panel null? {loadGamePanel == null}");
     }
-
+    // Show the main menu panel and hide the other panels when the game starts
     private void Start()
     {
         Debug.Log("MainMenuManager Start");
@@ -69,7 +74,7 @@ public class MainMenuManager : MonoBehaviour
 
         ShowMainMenu();
     }
-
+    // Show the main menu panel
     public void ShowMainMenu()
     {
         Debug.Log("Showing Main Menu");
@@ -77,7 +82,7 @@ public class MainMenuManager : MonoBehaviour
         if (newGamePanel != null) newGamePanel.SetActive(false);
         if (loadGamePanel != null) loadGamePanel.SetActive(false);
     }
-
+    // Show the new game panel
     public void ShowNewGame()
     {
         Debug.Log("Showing New Game Panel");
@@ -94,7 +99,7 @@ public class MainMenuManager : MonoBehaviour
             newGameErrorText.text = "";
         }
     }
-
+    // Show the load game panel
     public void ShowLoadGame()
     {
         Debug.Log("Showing Load Game Panel");
@@ -104,7 +109,7 @@ public class MainMenuManager : MonoBehaviour
         
         RefreshSaveFileList();
     }
-
+    // Refresh the list of save files in the load game panel by creating buttons for each save file
     private void RefreshSaveFileList()
     {
         Debug.Log("Refreshing save file list");
@@ -166,7 +171,7 @@ public class MainMenuManager : MonoBehaviour
         SaveSlotManager.DeleteSave(saveName);
         RefreshSaveFileList();
     }
-
+    // Create a new game with the specified save name
     private void CreateNewGame()
     {
         Debug.Log("Creating new game...");
@@ -196,8 +201,7 @@ public class MainMenuManager : MonoBehaviour
         Debug.Log($"Loading game scene: {gameSceneName}");
         SceneManager.LoadScene(gameSceneName);
     }
-
-
+    // Load the game with the specified save name
     private void LoadGame(string saveName)
     {
         Debug.Log($"Loading game: {saveName}");
@@ -205,7 +209,7 @@ public class MainMenuManager : MonoBehaviour
         DataPersistenceManager.instance.LoadGame();
         SceneManager.LoadScene(gameSceneName);
     }
-
+    // Quit the game
     public void QuitGame()
     {
         Debug.Log("Quitting game");

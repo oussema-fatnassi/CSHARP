@@ -1,5 +1,10 @@
 using System.Collections.Generic;
 
+/*
+    This class is a mock implementation of the Input class for testing purposes.
+    It allows setting the values of the axes for testing the movement of the follower character.
+*/
+
 public static class MockInput
 {
     private static Dictionary<string, float> axes = new Dictionary<string, float>();

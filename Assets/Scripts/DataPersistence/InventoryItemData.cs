@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+    This class is responsible for storing the data of the inventory items.
+    It is used by the GameData class to serialize and deserialize the inventory items.
+*/
+
 [System.Serializable]
 public class InventoryItemData
 {

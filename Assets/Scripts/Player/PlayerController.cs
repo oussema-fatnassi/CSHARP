@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+    This class is responsible for controlling the player character in the game.
+    It handles the movement of the player character and the animation of the player character.
+*/
+
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] 
@@ -11,8 +16,7 @@ public class PlayerController : MonoBehaviour
     private float horizontal;
     private float vertical;
 
-    // Flag to indicate if we are running tests
-    public bool IsTesting { get; set; } = false; // Default is false
+    public bool IsTesting { get; set; } = false;
 
     private void Start()
     {
@@ -25,10 +29,9 @@ public class PlayerController : MonoBehaviour
         Move();
         Animate();
     }
-
+    // Move the player character based on the input
     private void Move()
     {
-        // Use MockInput if we are in testing mode, otherwise use Unity's Input
         horizontal = IsTesting ? MockInput.GetAxis("Horizontal") : Input.GetAxis("Horizontal");
         vertical = IsTesting ? MockInput.GetAxis("Vertical") : Input.GetAxis("Vertical");
 
@@ -50,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
         transform.position += speed * Time.deltaTime * movement;
     }
-
+    // Animate the player character based on the movement
     private void Animate()
     {
         if (horizontal != 0 || vertical != 0)

@@ -1,5 +1,10 @@
 using UnityEngine;
 
+/*
+    This class is responsible for handling the behavior of the Healer NPC in the game.
+    It allows the player to interact with the NPC and heal the player to max health.
+*/
+
 public class HealerNPC : MonoBehaviour
 {
     private NPC npc; 
@@ -16,7 +21,7 @@ public class HealerNPC : MonoBehaviour
             FindAndHealPlayer();
         }
     }
-
+    // Finds the active player in the game and heals them to max health
     private void FindAndHealPlayer()
     {
         GameObject playerContainer = GameObject.FindWithTag("PlayerContainer");
