@@ -3,17 +3,20 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
+/*
+    This class is responsible for testing the MainMenuManager class in play mode.
+    It tests the ShowMainMenu and ShowNewGame methods of the MainMenuManager class.
+*/
 public class MainMenuManagerPlayModeTest
 {
     private GameObject mainMenuManagerObject;
     private MainMenuManager mainMenuManager;
 
-    // Mock UI panels and save container
     private GameObject mainMenuPanel;
     private GameObject newGamePanel;
     private GameObject loadGamePanel;
     private GameObject saveFileContainer;
-
+    // Set up the test environment by creating a new MainMenuManager object and setting the mainMenuPanel, newGamePanel, and loadGamePanel fields to null.
     [SetUp]
     public void Setup()
     {
@@ -42,7 +45,7 @@ public class MainMenuManagerPlayModeTest
 
         mainMenuManager.saveFileButtonPrefab = new GameObject("SaveFileButtonPrefab");
     }
-
+    // Tear down the test environment by destroying the MainMenuManager object and the mainMenuPanel, newGamePanel, and loadGamePanel objects.
     [TearDown]
     public void Teardown()
     {
@@ -52,7 +55,7 @@ public class MainMenuManagerPlayModeTest
         Object.DestroyImmediate(loadGamePanel);
         Object.DestroyImmediate(saveFileContainer);
     }
-
+    // Test the ShowMainMenu method of the MainMenuManager class.
     [UnityTest]
     public IEnumerator ShowMainMenu_ActivatesMainMenuPanelOnly()
     {
@@ -64,7 +67,7 @@ public class MainMenuManagerPlayModeTest
         Assert.IsFalse(newGamePanel.activeSelf, "New game panel should be inactive.");
         Assert.IsFalse(loadGamePanel.activeSelf, "Load game panel should be inactive.");
     }
-
+    // Test the ShowNewGame method of the MainMenuManager class.
     [UnityTest]
     public IEnumerator ShowNewGame_ActivatesNewGamePanelOnly()
     {
